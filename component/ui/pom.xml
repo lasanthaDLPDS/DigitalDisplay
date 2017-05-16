@@ -23,16 +23,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
-        <groupId>org.wso2.carbon.device</groupId>
+        <groupId>org.homeautomation</groupId>
         <artifactId>digitaldisplay-component</artifactId>
         <version>3.0.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <version>2.1.0-SNAPSHOT</version>
-    <artifactId>${groupId}.digitaldisplay.ui</artifactId>
-    <name>${groupId}.digitaldisplay.ui</name>
+    <version>3.0.0</version>
+    <artifactId>org.homeautomation.digitaldisplay.ui</artifactId>
+    <name>Digital Display UI</name>
     <packaging>pom</packaging>
     <url>http://wso2.org</url>
 

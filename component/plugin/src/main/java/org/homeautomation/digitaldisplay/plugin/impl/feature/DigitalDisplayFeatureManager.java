@@ -16,43 +16,76 @@
 
 package org.homeautomation.digitaldisplay.plugin.impl.feature;
 
-import org.homeautomation.digitaldisplay.plugin.constants.DigitalDisplayConstants;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.homeautomation.digitaldisplay.plugin.impl.DigitalDisplayManager;
+import org.homeautomation.digitaldisplay.plugin.impl.util.DigitalDisplayUtils;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.common.Feature;
 import org.wso2.carbon.device.mgt.common.FeatureManager;
-import org.wso2.carbon.device.mgt.extensions.feature.mgt.GenericFeatureManager;
+import org.wso2.carbon.device.mgt.core.service.DeviceManagementProviderService;
+
 import java.util.List;
 
+import static org.homeautomation.digitaldisplay.plugin.constants.DigitalDisplayConstants.DEVICE_TYPE;
+
 public class DigitalDisplayFeatureManager implements FeatureManager {
-	@Override
-	public boolean addFeature(Feature feature) throws DeviceManagementException {
-		return false;
-	}
 
-	@Override
-	public boolean addFeatures(List<Feature> features) throws DeviceManagementException {
-		return false;
-	}
+    private static final Log log = LogFactory.getLog(DigitalDisplayManager.class);
 
-	@Override
-	public Feature getFeature(String name) throws DeviceManagementException {
-		GenericFeatureManager genericFeatureManager = GenericFeatureManager.getInstance();
-		return genericFeatureManager.getFeature(DigitalDisplayConstants.DEVICE_TYPE, name);
-	}
+    @Override
+    public boolean addFeature(Feature feature) throws DeviceManagementException {
+        return false;
+    }
 
-	@Override
-	public List<Feature> getFeatures() throws DeviceManagementException {
-		GenericFeatureManager genericFeatureManager = GenericFeatureManager.getInstance();
-		return genericFeatureManager.getFeatures(DigitalDisplayConstants.DEVICE_TYPE);
-	}
+    @Override
+    public boolean addFeatures(List<Feature> features) throws DeviceManagementException {
+        return false;
+    }
 
-	@Override
-	public boolean removeFeature(String name) throws DeviceManagementException {
-		return false;
-	}
+    @Override
+    public Feature getFeature(String name) throws DeviceManagementException {
+        DeviceManagementProviderService dms;
+        try {
+            dms = DigitalDisplayUtils.getDeviceManagementService();
+            FeatureManager fm = dms.getFeatureManager(DEVICE_TYPE);
+            if (fm == null) {
+                throw new DeviceManagementException("No feature manager is " +
+                                                            "registered with the given type '" + DEVICE_TYPE + "'");
+            }
+            return fm.getFeature(name);
+        } catch (DeviceManagementException e) {
+            String msg = "Error occurred while retrieving the list of features of '" + DEVICE_TYPE + "' device type";
+            log.error(msg, e);
+            throw new DeviceManagementException(msg);
+        }
+    }
 
-	@Override
-	public boolean addSupportedFeaturesToDB() throws DeviceManagementException {
-		return false;
-	}
+    @Override
+    public List<Feature> getFeatures() throws DeviceManagementException {
+        DeviceManagementProviderService dms;
+        try {
+            dms = DigitalDisplayUtils.getDeviceManagementService();
+            FeatureManager fm = dms.getFeatureManager(DEVICE_TYPE);
+            if (fm == null) {
+                throw new DeviceManagementException("No feature manager is " +
+                                                            "registered with the given type '" + DEVICE_TYPE + "'");
+            }
+            return fm.getFeatures();
+        } catch (DeviceManagementException e) {
+            String msg = "Error occurred while retrieving the list of features of '" + DEVICE_TYPE + "' device type";
+            log.error(msg, e);
+            throw new DeviceManagementException(msg);
+        }
+    }
+
+    @Override
+    public boolean removeFeature(String name) throws DeviceManagementException {
+        return false;
+    }
+
+    @Override
+    public boolean addSupportedFeaturesToDB() throws DeviceManagementException {
+        return false;
+    }
 }

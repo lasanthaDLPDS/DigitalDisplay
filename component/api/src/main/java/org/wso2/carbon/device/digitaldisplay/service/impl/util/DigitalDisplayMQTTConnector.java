@@ -4,13 +4,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.json.JSONObject;
 import org.wso2.carbon.device.digitaldisplay.service.impl.constants.DigitalDisplayConstants;
 import org.wso2.carbon.device.digitaldisplay.service.impl.model.ScreenShotModel;
+import org.wso2.carbon.device.digitaldisplay.service.impl.transport.mqtt.MQTTTransportHandler;
+import org.wso2.carbon.device.digitaldisplay.service.impl.transport.mqtt.MqttConfig;
+import org.wso2.carbon.device.digitaldisplay.service.impl.transport.TransportHandlerException;
 import org.wso2.carbon.device.digitaldisplay.service.impl.websocket.DigitalDisplayWebSocketServerEndPoint;
-import org.json.JSONObject;
-//import org.wso2.carbon.device.mgt.iot.controlqueue.mqtt.MqttConfig;
-//import org.wso2.carbon.device.mgt.iot.transport.TransportHandlerException;
-//import org.wso2.carbon.device.mgt.iot.transport.mqtt.MQTTTransportHandler;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +33,7 @@ public class DigitalDisplayMQTTConnector extends MQTTTransportHandler {
 
     private DigitalDisplayMQTTConnector() {
         super(iotServerSubscriber, DigitalDisplayConstants.DEVICE_TYPE,
-              MqttConfig.getInstance().getMqttQueueEndpoint(), subscribeTopic);
+              MqttConfig.getInstance().getUrl(), subscribeTopic);
     }
 
     @Override
@@ -42,10 +42,9 @@ public class DigitalDisplayMQTTConnector extends MQTTTransportHandler {
             public void run() {
                 while (!isConnected()) {
                     try {
-                        String brokerUsername = MqttConfig.getInstance().getMqttQueueUsername();
-                        String brokerPassword = MqttConfig.getInstance().getMqttQueuePassword();
-                        setUsernameAndPassword(brokerUsername, brokerPassword);
-                        connectToQueue();
+                        String brokerUsername = MqttConfig.getInstance().getUsername();
+                        String brokerPassword = MqttConfig.getInstance().getPassword();
+                        connectToQueue(brokerUsername, brokerPassword);
                     } catch (TransportHandlerException e) {
                         log.error("Connection to MQTT Broker at: " + mqttBrokerEndPoint + " failed", e);
                         try {
@@ -94,6 +93,21 @@ public class DigitalDisplayMQTTConnector extends MQTTTransportHandler {
             int length = schreenShot.getInt("size");
             createScreenShot(sessionId, picId, pos, length, data);
         }
+    }
+
+    @Override
+    public void processIncomingMessage() {
+
+    }
+
+    @Override
+    public void publishDeviceData(String... publishData) {
+
+    }
+
+    @Override
+    public void publishDeviceData() {
+
     }
 
     private void createScreenShot(String sessionId, String picId, int pos, int length, String data) {
@@ -154,31 +168,4 @@ public class DigitalDisplayMQTTConnector extends MQTTTransportHandler {
         terminatorThread.setDaemon(true);
         terminatorThread.start();
     }
-
-
-    @Override
-    public void publishDeviceData() throws TransportHandlerException {
-
-    }
-
-    @Override
-    public void publishDeviceData(MqttMessage publishData) throws TransportHandlerException {
-
-    }
-
-    @Override
-    public void publishDeviceData(String... publishData) throws TransportHandlerException {
-
-    }
-
-    @Override
-    public void processIncomingMessage() {
-
-    }
-
-    @Override
-    public void processIncomingMessage(MqttMessage message) throws TransportHandlerException {
-
-    }
-
 }

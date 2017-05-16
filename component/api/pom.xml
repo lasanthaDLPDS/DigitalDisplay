@@ -21,17 +21,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
-        <groupId>org.wso2.carbon.device</groupId>
+        <groupId>org.homeautomation</groupId>
         <artifactId>digitaldisplay-component</artifactId>
         <version>3.0.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>${project-base-package}.api</artifactId>
+    <artifactId>org.homeautomation.digitaldisplay.api</artifactId>
     <version>3.0.0</version>
     <packaging>war</packaging>
-    <name>${project-base-package}.digitaldisplay API</name>
+    <name>Digitaldisplay API</name>
     <url>http://wso2.com</url>
 
     <dependencies>
@@ -186,7 +186,7 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>commons-codec</groupId>
+            <groupId>commons-codec.wso2</groupId>
             <artifactId>commons-codec</artifactId>
         </dependency>
         <dependency>
@@ -254,7 +254,7 @@
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
-                    <warName>${project-base-package}.api</warName>
+                    <warName>org.homeautomation.digitaldisplay.api</warName>
                 </configuration>
             </plugin>
         </plugins>

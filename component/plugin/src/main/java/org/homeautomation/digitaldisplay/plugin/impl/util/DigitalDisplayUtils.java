@@ -22,7 +22,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.homeautomation.digitaldisplay.plugin.constants.DigitalDisplayConstants;
 import org.homeautomation.digitaldisplay.plugin.exception.DigitalDisplayDeviceMgtPluginException;
+import org.wso2.carbon.context.PrivilegedCarbonContext;
 import org.wso2.carbon.device.mgt.common.Device;
+import org.wso2.carbon.device.mgt.core.service.DeviceManagementProviderService;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -106,5 +109,17 @@ public class DigitalDisplayUtils {
             throw new DigitalDisplayDeviceMgtPluginException("Error occurred while initializing Iot Device " +
                                                               "Management database schema", e);
         }
+    }
+
+    public static DeviceManagementProviderService getDeviceManagementService() {
+        PrivilegedCarbonContext ctx = PrivilegedCarbonContext.getThreadLocalCarbonContext();
+        DeviceManagementProviderService deviceManagementProviderService =
+                (DeviceManagementProviderService) ctx.getOSGiService(DeviceManagementProviderService.class, null);
+        if (deviceManagementProviderService == null) {
+            String msg = "DeviceImpl Management provider service has not initialized.";
+            log.error(msg);
+            throw new IllegalStateException(msg);
+        }
+        return deviceManagementProviderService;
     }
 }

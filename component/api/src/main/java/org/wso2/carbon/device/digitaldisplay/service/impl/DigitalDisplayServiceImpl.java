@@ -23,6 +23,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.device.digitaldisplay.service.impl.constants.DigitalDisplayConstants;
 import org.wso2.carbon.device.digitaldisplay.service.impl.exception.DigitalDisplayException;
+import org.wso2.carbon.device.digitaldisplay.service.impl.transport.mqtt.MqttConfig;
+import org.wso2.carbon.device.digitaldisplay.service.impl.transport.TransportHandlerException;
 import org.wso2.carbon.device.digitaldisplay.service.impl.util.APIUtil;
 import org.wso2.carbon.device.digitaldisplay.service.impl.util.DigitalDisplayMQTTConnector;
 import org.wso2.carbon.device.digitaldisplay.service.impl.util.ZipArchive;
@@ -235,9 +237,6 @@ public class DigitalDisplayServiceImpl implements DigitalDisplayService{
 
         Runnable connector = new Runnable() {
             public void run() {
-                if (waitForServerStartup()) {
-                    return;
-                }
                 DigitalDisplayServiceImpl.digitalDisplayMQTTConnector = digitalDisplayMQTTConnector;
                 if (MqttConfig.getInstance().isEnabled()) {
                     digitalDisplayMQTTConnector.connect();
@@ -400,7 +399,9 @@ public class DigitalDisplayServiceImpl implements DigitalDisplayService{
         String payload = operation + param;
         try {
             digitalDisplayMQTTConnector.publishToDigitalDisplay(topic, payload, 2, false);
-        }  finally {
+        } catch (TransportHandlerException e) {
+            throw new DigitalDisplayException("Error while sending the message",e);
+        } finally {
             PrivilegedCarbonContext.endTenantFlow();
         }
     }

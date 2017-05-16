@@ -26,7 +26,7 @@
         <version>1</version>
     </parent>
 
-    <groupId>org.wso2.carbon.device</groupId>
+    <groupId>org.homeautomation</groupId>
     <artifactId>digitaldisplay</artifactId>
     <version>3.0.0</version>
     <packaging>pom</packaging>
@@ -291,7 +291,7 @@
                 <version>${commons-json.version}</version>
             </dependency>
             <dependency>
-                <groupId>commons-codec</groupId>
+                <groupId>commons-codec.wso2</groupId>
                 <artifactId>commons-codec</artifactId>
                 <version>${commons-codec.wso2.version}</version>
             </dependency>
@@ -387,6 +387,8 @@
     <properties>
         <carbon.kernel.version>4.4.11</carbon.kernel.version>
 
+        <org.homeautomation.version>3.0.0</org.homeautomation.version>
+
         <!-- Carbon Device Management -->
         <carbon.device.mgt.version>2.0.10</carbon.device.mgt.version>
         <carbon.device.mgt.plugin.version>3.0.8</carbon.device.mgt.plugin.version>
@@ -408,7 +410,6 @@
 
         <wso2.maven.compiler.source>1.7</wso2.maven.compiler.source>
         <wso2.maven.compiler.target>1.7</wso2.maven.compiler.target>
-        <project-base-package>org.homeautomation.digitaldisplay</project-base-package>
         <junit.version>3.8.1</junit.version>
         <org.apache.felix.version>1.4.0</org.apache.felix.version>
         <maven-clean-plugin.version>2.4.1</maven-clean-plugin.version>
