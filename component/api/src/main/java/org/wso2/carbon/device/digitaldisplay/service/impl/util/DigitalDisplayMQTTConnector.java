@@ -31,9 +31,17 @@ public class DigitalDisplayMQTTConnector extends MQTTTransportHandler {
 
     private Map<String, ScreenShotModel> screenshots = new HashMap<>();
 
+    private static final String BROKER_HOST;
+    private static final String BROKER_PORT;
+
+    static {
+        BROKER_HOST = System.getProperty("mqtt.broker.host");
+        BROKER_PORT = System.getProperty("mqtt.broker.port");
+    }
+
     private DigitalDisplayMQTTConnector() {
         super(iotServerSubscriber, DigitalDisplayConstants.DEVICE_TYPE,
-              MqttConfig.getInstance().getUrl(), subscribeTopic);
+              "tcp://" + BROKER_HOST + ":" + BROKER_PORT, subscribeTopic);
     }
 
     @Override

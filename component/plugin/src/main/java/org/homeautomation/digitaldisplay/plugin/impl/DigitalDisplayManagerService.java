@@ -17,6 +17,7 @@
 package org.homeautomation.digitaldisplay.plugin.impl;
 
 import org.homeautomation.digitaldisplay.plugin.constants.DigitalDisplayConstants;
+import org.wso2.carbon.base.MultitenantConstants;
 import org.wso2.carbon.device.mgt.common.DeviceManagementException;
 import org.wso2.carbon.device.mgt.common.DeviceManager;
 import org.wso2.carbon.device.mgt.common.OperationMonitoringTaskConfig;
@@ -57,7 +58,7 @@ public class DigitalDisplayManagerService implements DeviceManagementService {
 
     @Override
     public ProvisioningConfig getProvisioningConfig() {
-        return null;
+        return new ProvisioningConfig(MultitenantConstants.SUPER_TENANT_DOMAIN_NAME, false);
     }
 
     @Override

@@ -12,10 +12,13 @@ org.eclipse.equinox.p2.touchpoint.natives.mkdir(path:${installFolder}/../../depl
 org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../features/org.homeautomation.digitaldisplay_${feature.version}/jaggeryapps/,target:${installFolder}/../../deployment/server/jaggeryapps/,overwrite:true);\
 org.eclipse.equinox.p2.touchpoint.natives.mkdir(path:${installFolder}/../../database/);\
 org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../features/org.homeautomation.digitaldisplay_${feature.version}/database/,target:${installFolder}/../../database/,overwrite:true);\
+org.eclipse.equinox.p2.touchpoint.natives.mkdir(path:${installFolder}/../../conf/etc/device-mgt-plugins/);\
+org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../features/org.homeautomation.digitaldisplay_${feature.version}/conf/,target:${installFolder}/../../conf/etc/device-mgt-plugins/,overwrite:true);\
 
 instructions.unconfigure = \
 org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../conf/device-types/digital_display.json);\
 org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../conf/device-types/digital_display.xml);\
+org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../conf/etc/device-mgt-plugins/digital_display.xml);\
 org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../deployment/server/webapps/digital_display.war);\
 org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../deployment/server/webapps/digital_display);\
 org.eclipse.equinox.p2.touchpoint.natives.remove(path:${installFolder}/../../../dbscripts/cdm/plugins/digital_display);\

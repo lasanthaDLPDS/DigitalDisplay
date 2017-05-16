@@ -62,14 +62,13 @@
                         <Private-Package>org.homeautomation.digitaldisplay.plugin.internal</Private-Package>
                         <Import-Package>
                             org.wso2.carbon.context, org.wso2.carbon.device.mgt.core.service,
-                            org.osgi.framework,
+                            org.osgi.framework,org.wso2.carbon.base,
                             org.osgi.service.component,
                             org.apache.commons.logging,
                             javax.naming;resolution:=optional,
                             javax.sql;resolution:=optional,
                             org.wso2.carbon.device.mgt.common.*,
                             org.wso2.carbon.device.mgt.common,
-                            org.wso2.carbon.device.mgt.iot.*,
                             org.wso2.carbon.device.mgt.extensions.feature.mgt.*,
                             org.wso2.carbon.utils.*
                         </Import-Package>

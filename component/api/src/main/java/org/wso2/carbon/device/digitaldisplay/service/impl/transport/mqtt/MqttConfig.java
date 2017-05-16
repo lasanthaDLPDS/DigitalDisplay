@@ -23,6 +23,7 @@ import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.device.digitaldisplay.service.impl.config.DeviceManagementConfiguration;
 import org.wso2.carbon.device.digitaldisplay.service.impl.config.DigitalDisplayConfig;
 import org.wso2.carbon.device.digitaldisplay.service.impl.config.EventListenerConfiguration;
+import org.wso2.carbon.device.digitaldisplay.service.impl.config.exception.DigitalDisplayConfigurationException;
 
 import java.util.List;
 
@@ -41,40 +42,45 @@ public class MqttConfig {
     private String clearSession;
 
     private MqttConfig() {
-        DeviceManagementConfiguration deviceManagementConfiguration = DigitalDisplayConfig.getInstance()
-                .getDeviceTypeConfiguration();
-        List<EventListenerConfiguration.Property> properties = deviceManagementConfiguration
-                .getEventListenerConfiguration().getProperties();
-        String provider = deviceManagementConfiguration.getEventListenerConfiguration().getEventListenerProvider();
-        if (provider.equals("MQTT")) {
-            enabled = true;
-        }
-        if (enabled) {
-            for (EventListenerConfiguration.Property property : properties) {
-                switch (property.getName()) {
-                    case "url":
-                        url = property.getValue();
-                        break;
-                    case "username":
-                        username = property.getValue();
-                        break;
-                    case "password":
-                        password = property.getValue();
-                        break;
-                    case "dcrUrl":
-                        dcrUrl = property.getValue();
-                        break;
-                    case "qos":
-                        qos = property.getValue();
-                        break;
-                    case "scopes":
-                        scopes = property.getValue();
-                        break;
-                    case "clearSession":
-                        clearSession = property.getValue();
-                        break;
+        try {
+            DigitalDisplayConfig.initialize();
+            DeviceManagementConfiguration deviceManagementConfiguration =
+                    DigitalDisplayConfig.getInstance().getDeviceTypeConfiguration();
+            List<EventListenerConfiguration.Property> properties = deviceManagementConfiguration
+                    .getEventListenerConfiguration().getProperties();
+            String provider = deviceManagementConfiguration.getEventListenerConfiguration().getEventListenerProvider();
+            if (provider.equals("MQTT")) {
+                enabled = true;
+            }
+            if (enabled) {
+                for (EventListenerConfiguration.Property property : properties) {
+                    switch (property.getName()) {
+                        case "url":
+                            url = property.getValue();
+                            break;
+                        case "username":
+                            username = property.getValue();
+                            break;
+                        case "password":
+                            password = property.getValue();
+                            break;
+                        case "dcrUrl":
+                            dcrUrl = property.getValue();
+                            break;
+                        case "qos":
+                            qos = property.getValue();
+                            break;
+                        case "scopes":
+                            scopes = property.getValue();
+                            break;
+                        case "clearSession":
+                            clearSession = property.getValue();
+                            break;
+                    }
                 }
             }
+        } catch (DigitalDisplayConfigurationException e) {
+            log.error("Error occurred while initializing DigitalDisplayConfig", e);
         }
     }
 
