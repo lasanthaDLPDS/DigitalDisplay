@@ -45,7 +45,7 @@
     <div id="download-device-modal-content" class="hide">
         <div class="modal-content">
             <div class="row">
-                <div class="col-md-7 center-container">
+                <div class="col-md-7 col-centered">
                     <h3>Name your device and download the agent from following link.</h3>
                     <br/>
                     <form id="downloadForm" method="GET"
@@ -69,11 +69,8 @@
                         </div>
                         <div class="buttons" style="padding-bottom: 0px">
                             <a class="btn btn-operations" onclick="downloadAgent()">Download Now</a>
-                            &nbsp;&nbsp;
-                            <a href="#" id="download-device-download-link"
-                               class="btn btn-operations"> Copy Link </a>
-                            &nbsp;&nbsp;
                         </div>
+                        <br />
                     </form>
                 </div>
             </div>
@@ -239,52 +236,10 @@
         </a>
     </center>
 </div>
-<style type="text/css">
-    .circle {
-        background: none repeat scroll 0 0 #191919;
-        border-radius: 50px;
-        height: 50px;
-        padding: 10px;
-        width: 50px;
-        color: #fff;
-    }
-    .padding-top-double {
-        padding-top: 20px;
-    }
-    .padding-double {
-        padding: 20px;
-    }
-    .grey {
-        color: #333;
-    }
-    hr {
-        display: block;
-        height: 1px;
-        border: 0;
-        border-top: 1px solid #7f7f7f;
-        margin: 1em 0;
-        padding: 0;
-        opacity: 0.2;
-    }
-    .light-grey {
-        color: #7c7c7c;
-    }
-    .uppercase {
-        text-transform: uppercase;
-    }
-    .grey-bg {
-        background-color: #f6f4f4;
-    }
-    .doc-link {
-        background: #11375B;
-        padding: 20px;
-        color: white;
-        margin-top: 0;
-    }
-    .doc-link a {
-        color: white;
-    }
-</style>
+
+{{#zone "topCss"}}
+    {{css "/css/styles.css"}}
+{{/zone}}
 
 {{#zone "bottomJs"}}
     {{js "/js/download.js"}}

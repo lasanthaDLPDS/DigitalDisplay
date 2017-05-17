@@ -1,0 +1,10 @@
+{
+    "deviceType": {
+        "label": "Digital Display",
+        "category": "iot",
+        "downloadAgentUri": "digitaldisplay/device/download",
+        "scopes": [
+            "perm:digitaldisplay:enroll"
+        ]
+    }
+}

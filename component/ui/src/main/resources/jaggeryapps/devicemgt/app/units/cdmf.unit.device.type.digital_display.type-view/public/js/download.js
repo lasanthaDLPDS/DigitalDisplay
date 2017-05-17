@@ -16,9 +16,9 @@
  * under the License.
  */
 
-var modalPopup = ".wr-modalpopup";
-var modalPopupContainer = modalPopup + " .modalpopup-container";
-var modalPopupContent = modalPopup + " .modalpopup-content";
+var modalPopup = ".modal";
+var modalPopupContainer = modalPopup + " .modal-content";
+var modalPopupContent = modalPopup + " .modal-content";
 var body = "body";
 
 /*
@@ -33,7 +33,7 @@ function setPopupMaxHeight() {
  * show popup function.
  */
 function showPopup() {
-    $(modalPopup).show();
+    $(modalPopup).modal('show');
     setPopupMaxHeight();
     $('#downloadForm').validate({
         rules: {
@@ -56,9 +56,9 @@ function showPopup() {
             deviceType = this.value;
         }
     });
-    if (deviceType == 'digitaldisplay'){
+    if (deviceType == 'digital_display'){
         $('.sketchType').remove();
-        $('input[name="sketchType"][value="digitaldisplay"]').prop('checked', true);
+        $('input[name="sketchType"][value="digital_display"]').prop('checked', true);
         $("label[for='digitaldisplay']").text("Simple Agent");
     }else{
         $('.sketchTypes').remove();
@@ -72,7 +72,7 @@ function hidePopup() {
     $('label[for=deviceName]').remove();
     $('.control-group').removeClass('success').removeClass('error');
     $(modalPopupContent).html('');
-    $(modalPopup).hide();
+    $(modalPopup).modal('hide');
 }
 
 /*
@@ -95,39 +95,6 @@ function attachEvents() {
         var payload = {"sketchType": sketchType, "deviceType": deviceType};
         $(modalPopupContent).html($('#download-device-modal-content').html());
         showPopup();
-        var deviceName;
-        $("a#download-device-download-link").click(function () {
-            $('.new-device-name').each(function () {
-                if (this.value != "") {
-                    deviceName = this.value;
-                }
-            });
-            $('label[for=deviceName]').remove();
-            if (deviceName && deviceName.length >= 4) {
-                payload.deviceName = deviceName;
-                invokerUtil.post(
-                    downloadDeviceAPI,
-                    payload,
-                    function (data, textStatus, jqxhr) {
-                        doAction(data);
-                    },
-                    function (data) {
-                        doAction(data);
-                    }
-                );
-            }else if(deviceName){
-                $('.controls').append('<label for="deviceName" generated="true" class="error" ' +
-                                      'style="display: inline-block;">Please enter at least 4 ' +
-                                      'characters.</label>');
-                $('.control-group').removeClass('success').addClass('error');
-            } else {
-                $('.controls').append('<label for="deviceName" generated="true" class="error" ' +
-                                      'style="display: inline-block;">This field is required.' +
-                                      '</label>');
-                $('.control-group').removeClass('success').addClass('error');
-            }
-        });
-
         $("a#download-device-cancel-link").click(function () {
             hidePopup();
         });
