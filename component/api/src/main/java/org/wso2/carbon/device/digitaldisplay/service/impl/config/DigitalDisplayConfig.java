@@ -19,7 +19,7 @@ public class DigitalDisplayConfig {
     private static final Log log = LogFactory.getLog(DigitalDisplayConfig.class);
     private static final String DEVICE_TYPE_CONFIG_PATH =
             CarbonUtils.getEtcCarbonConfigDirPath() + File.separator + "device-mgt-plugins" + File.separator
-                    + "digital_display.xml";
+                    + "digitaldisplay.xml";
     private static DigitalDisplayConfig digitalDisplayConfig = new DigitalDisplayConfig();
     private static DeviceManagementConfiguration deviceManagementConfiguration;
 

@@ -123,7 +123,7 @@
                                     <outputDirectory>
                                         ${project.build.directory}/maven-shared-archive-resources/webapps/
                                     </outputDirectory>
-                                    <destFileName>digital_display.war</destFileName>
+                                    <destFileName>digitaldisplay.war</destFileName>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>

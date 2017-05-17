@@ -63,11 +63,11 @@
     </context-param>
     <context-param>
         <param-name>managed-api-context-template</param-name>
-        <param-value>/digital_display/{version}</param-value>
+        <param-value>/digitaldisplay/{version}</param-value>
     </context-param>
     <context-param>
         <param-name>managed-api-application</param-name>
-        <param-value>digital_display</param-value>
+        <param-value>digitaldisplay</param-value>
     </context-param>
     <context-param>
         <param-name>managed-api-isSecured</param-name>

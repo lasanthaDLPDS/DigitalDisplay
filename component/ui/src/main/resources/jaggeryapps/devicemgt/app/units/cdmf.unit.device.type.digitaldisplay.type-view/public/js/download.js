@@ -56,9 +56,9 @@ function showPopup() {
             deviceType = this.value;
         }
     });
-    if (deviceType == 'digital_display'){
+    if (deviceType == 'digitaldisplay'){
         $('.sketchType').remove();
-        $('input[name="sketchType"][value="digital_display"]').prop('checked', true);
+        $('input[name="sketchType"][value="digitaldisplay"]').prop('checked', true);
         $("label[for='digitaldisplay']").text("Simple Agent");
     }else{
         $('.sketchTypes').remove();

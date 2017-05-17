@@ -27,7 +27,7 @@ window.onbeforeunload = function () {
 }
 
 function connect() {
-    displayClient = new WebSocket("wss://" + host + ":" + port + "/digital_display/" + sessionId);
+    displayClient = new WebSocket("wss://" + host + ":" + port + "/digitaldisplay/" + sessionId);
 
     displayClient.onmessage = function (event) {
         var message = event.data;
