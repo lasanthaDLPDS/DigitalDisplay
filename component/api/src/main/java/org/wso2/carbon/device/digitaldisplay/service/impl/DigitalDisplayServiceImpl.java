@@ -77,6 +77,7 @@ public class DigitalDisplayServiceImpl implements DigitalDisplayService{
             device.setName(name);
             device.setType(DigitalDisplayConstants.DEVICE_TYPE);
             enrolmentInfo.setOwner(APIUtil.getAuthenticatedUser());
+            enrolmentInfo.setOwnership(EnrolmentInfo.OwnerShip.BYOD);
             device.setEnrolmentInfo(enrolmentInfo);
             boolean added = APIUtil.getDeviceManagementService().enrollDevice(device);
             return added;
