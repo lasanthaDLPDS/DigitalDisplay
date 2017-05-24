@@ -315,6 +315,26 @@
                 <artifactId>org.wso2.carbon.user.api</artifactId>
                 <version>${carbon.kernel.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.analytics-common</groupId>
+                <artifactId>org.wso2.carbon.event.output.adapter.core</artifactId>
+                <version>${carbon.analytics.common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.analytics-common</groupId>
+                <artifactId>org.wso2.carbon.event.input.adapter.core</artifactId>
+                <version>${carbon.analytics.common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.analytics-common</groupId>
+                <artifactId>org.wso2.carbon.event.stream.core</artifactId>
+                <version>${carbon.analytics.common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.devicemgt-plugins</groupId>
+                <artifactId>org.wso2.carbon.device.mgt.input.adapter.extension</artifactId>
+                <version>${carbon.device.mgt.plugin.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -398,6 +418,9 @@
         <eclipse.osgi.version>3.8.1.v20120830-144521</eclipse.osgi.version>
         <javax.ws.rs.version>1.1.1</javax.ws.rs.version>
 
+        <javax.xml.parsers.import.pkg.version>[0.0.0,1.0.0)</javax.xml.parsers.import.pkg.version>
+
+
         <!--XMPP/MQTT Version-->
         <smack.wso2.version>3.0.4.wso2v1</smack.wso2.version>
         <smackx.wso2.version>3.0.4.wso2v1</smackx.wso2.version>
@@ -405,8 +428,12 @@
         <jackson.version>1.9.0</jackson.version>
         <commons-httpclient.orbit.version>3.1.0.wso2v2</commons-httpclient.orbit.version>
         <commons-json.version>3.0.0.wso2v1</commons-json.version>
+        <commons-json.version.range>[3.0.0, 3.1.0)</commons-json.version.range>
         <commons-codec.wso2.version>1.4.0.wso2v1</commons-codec.wso2.version>
         <eclipse.equinox.common.version>3.6.100.v20120522-1841</eclipse.equinox.common.version>
+
+        <carbon.analytics.common.version>5.1.5</carbon.analytics.common.version>
+        <carbon.event.processing.version>2.1.4</carbon.event.processing.version>
 
         <wso2.maven.compiler.source>1.7</wso2.maven.compiler.source>
         <wso2.maven.compiler.target>1.7</wso2.maven.compiler.target>

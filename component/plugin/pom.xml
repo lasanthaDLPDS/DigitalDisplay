@@ -61,16 +61,38 @@
                         <!--<Bundle-Description>IoT Server Impl Bundle</Bundle-Description>-->
                         <Private-Package>org.homeautomation.digitaldisplay.plugin.internal</Private-Package>
                         <Import-Package>
-                            org.wso2.carbon.context, org.wso2.carbon.device.mgt.core.service,
-                            org.osgi.framework,org.wso2.carbon.base,
+                            org.wso2.carbon.device.mgt.core.service,
+                            org.wso2.carbon.base,
+                            org.json.*;version="${commons-json.version.range}",
+                            org.osgi.framework,
                             org.osgi.service.component,
                             org.apache.commons.logging,
                             javax.naming;resolution:=optional,
                             javax.sql;resolution:=optional,
                             org.wso2.carbon.device.mgt.common.*,
                             org.wso2.carbon.device.mgt.common,
+                            org.wso2.carbon.device.mgt.input.adapter.extension.*,
                             org.wso2.carbon.device.mgt.extensions.feature.mgt.*,
-                            org.wso2.carbon.utils.*
+                            org.wso2.carbon.utils.*,
+                            org.wso2.carbon.context,
+                            org.wso2.carbon.core,
+                            javax.crypto,
+                            org.apache.commons.codec.binary,
+                            org.json.*;version="${commons-json.version.range}",
+                            org.wso2.carbon.certificate.mgt.core.*,
+                            org.wso2.carbon.device.mgt.analytics.data.publisher.exception,
+                            org.wso2.carbon.device.mgt.analytics.data.publisher.service,
+                            org.wso2.carbon.event.input.adapter.core,
+                            org.wso2.carbon.event.input.adapter.core.exception,
+                            org.jivesoftware.smack.*,
+                            javax.xml,
+                            javax.xml.bind,
+                            javax.xml.bind.annotation,
+                            javax.xml.parsers; version="${javax.xml.parsers.import.pkg.version}",
+                            org.w3c.dom,
+                            javax.inject,
+                            javax.websocket,
+                            javax.websocket.server
                         </Import-Package>
                         <Export-Package>
                             !org.homeautomation.digitaldisplay.plugin.internal,
@@ -115,6 +137,17 @@
             <groupId>commons-codec.wso2</groupId>
             <artifactId>commons-codec</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.json.wso2</groupId>
+            <artifactId>json</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon.analytics-common</groupId>
+            <artifactId>org.wso2.carbon.event.input.adapter.core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon.devicemgt-plugins</groupId>
+            <artifactId>org.wso2.carbon.device.mgt.input.adapter.extension</artifactId>
+        </dependency>
     </dependencies>
-
 </project>

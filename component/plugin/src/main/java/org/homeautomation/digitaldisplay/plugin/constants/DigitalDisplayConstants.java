@@ -17,21 +17,36 @@
 package org.homeautomation.digitaldisplay.plugin.constants;
 
 public class DigitalDisplayConstants {
+    //mqtt tranport related constants
+    public static final String MQTT_ADAPTER_TOPIC_PROPERTY_NAME = "mqtt.adapter.topic";
 
-    public final static String DEVICE_TYPE = "digitaldisplay";
-    public final static String DEVICE_PLUGIN_DEVICE_NAME = "DEVICE_NAME";
-    public final static String DEVICE_PLUGIN_DEVICE_ID = "DIGITAL_DISPLAY_DEVICE_ID";
-    public final static String RESTART_SERVER_CONSTANT = "restart_server";
-    public final static String RESTART_DISPLAY_CONSTANT = "restart_display";
-    public final static String RESTART_BROWSER_CONSTANT = "restart_browser";
-    public final static String TERMINATE_DISPLAY_CONSTANT = "terminate_display";
-    public final static String EDIT_SEQUENCE_CONSTANT = "edit_sequence";
-    public final static String UPLOAD_CONTENT_CONSTANT = "upload_content";
-    public final static String ADD_NEW_RESOURCE_CONSTANT = "add_new_resource";
-    public final static String REMOVE_RESOURCE_CONSTANT = "remove_resources";
-    public final static String SCREENSHOT_CONSTANT = "get_screenshot";
-    public final static String GET_CONTENTLIST_CONSTANT = "get_content_list";
-    public final static String GET_DEVICE_STATUS_CONSTANT = "get_device_status";
-    public final static String PUBLISH_TOPIC = "wso2/iot/digitaldisplay/%s/digitaldisplay_subscriber";
-    public static final String DATA_SOURCE_NAME = "jdbc/DigitalDisplayDM_DB";
+
+    public static final String DEVICE_OWNER = "DEVICE_OWNER";
+    public static final String DEVICE_ID = "DEVICE_ID";
+    public static final String DEVICE_NAME = "DEVICE_NAME";
+    public static final String MQTT_EP = "MQTT_EP";
+    public static final String DEVICE_TOKEN = "DEVICE_TOKEN";
+    public static final String DEVICE_REFRESH_TOKEN = "DEVICE_REFRESH_TOKEN";
+
+    public static final String APIM_APPLICATION_TOKEN_VALIDITY_PERIOD = "3600";
+
+
+    public static final String MQTT_ADAPTER_NAME = "digital_display_mqtt";
+    public static final String MQTT_ADAPTER_TYPE = "oauth-mqtt";
+    public final static String DEVICE_TYPE_PROVIDER_DOMAIN = "carbon.super";
+
+    public static final String USERNAME_PROPERTY_KEY = "username";
+    public static final String PASSWORD_PROPERTY_KEY = "password";
+    public static final String DCR_PROPERTY_KEY = "dcrUrl";
+    public static final String BROKER_URL_PROPERTY_KEY = "url";
+    public static final String SCOPES_PROPERTY_KEY = "scopes";
+    public static final String QOS_PROPERTY_KEY = "qos";
+    public static final String CLIENT_ID_PROPERTY_KEY = "qos";
+    public static final String CLEAR_SESSION_PROPERTY_KEY = "clearSession";
+    public static final String TOPIC = "topic";
+    public static final String SUBSCRIBED_TOPIC = "carbon.super/digitaldisplay/+/digital_display_publisher";
+
+    public static final String CONTENT_VALIDATION = "contentValidator";
+    public static final String CONTENT_TRANSFORMATION = "contentTransformer";
+    public static final String RESOURCE = "resource";
 }

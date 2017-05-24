@@ -59,7 +59,7 @@ public interface DigitalDisplayService {
     @PUT
     @ApiOperation(
             consumes = MediaType.APPLICATION_JSON,
-            httpMethod = "GET",
+            httpMethod = "PUT",
             value = "Download agent",
             notes = "",
             response = Response.class,
@@ -95,7 +95,7 @@ public interface DigitalDisplayService {
     @DELETE
     @ApiOperation(
             consumes = MediaType.APPLICATION_JSON,
-            httpMethod = "GET",
+            httpMethod = "DELETE",
             value = "Download agent",
             notes = "",
             response = Response.class,
@@ -137,7 +137,7 @@ public interface DigitalDisplayService {
     @POST
     @ApiOperation(
             consumes = MediaType.APPLICATION_JSON,
-            httpMethod = "GET",
+            httpMethod = "POST",
             value = "Download agent",
             notes = "",
             response = Response.class,
@@ -160,7 +160,7 @@ public interface DigitalDisplayService {
     @POST
     @ApiOperation(
             consumes = MediaType.APPLICATION_JSON,
-            httpMethod = "GET",
+            httpMethod = "POST",
             value = "Download agent",
             notes = "",
             response = Response.class,
@@ -183,7 +183,7 @@ public interface DigitalDisplayService {
     @POST
     @ApiOperation(
             consumes = MediaType.APPLICATION_JSON,
-            httpMethod = "GET",
+            httpMethod = "POST",
             value = "Download agent",
             notes = "",
             response = Response.class,
@@ -209,7 +209,7 @@ public interface DigitalDisplayService {
     @POST
     @ApiOperation(
             consumes = MediaType.APPLICATION_JSON,
-            httpMethod = "GET",
+            httpMethod = "POST",
             value = "Download agent",
             notes = "",
             response = Response.class,
@@ -228,7 +228,7 @@ public interface DigitalDisplayService {
     @POST
     @ApiOperation(
             consumes = MediaType.APPLICATION_JSON,
-            httpMethod = "GET",
+            httpMethod = "POST",
             value = "Download agent",
             notes = "",
             response = Response.class,
@@ -255,7 +255,7 @@ public interface DigitalDisplayService {
     @POST
     @ApiOperation(
             consumes = MediaType.APPLICATION_JSON,
-            httpMethod = "GET",
+            httpMethod = "POST",
             value = "Download agent",
             notes = "",
             response = Response.class,
@@ -282,7 +282,7 @@ public interface DigitalDisplayService {
     @POST
     @ApiOperation(
             consumes = MediaType.APPLICATION_JSON,
-            httpMethod = "GET",
+            httpMethod = "POST",
             value = "Download agent",
             notes = "",
             response = Response.class,
@@ -306,7 +306,7 @@ public interface DigitalDisplayService {
     @POST
     @ApiOperation(
             consumes = MediaType.APPLICATION_JSON,
-            httpMethod = "GET",
+            httpMethod = "POST",
             value = "Download agent",
             notes = "",
             response = Response.class,
@@ -329,7 +329,7 @@ public interface DigitalDisplayService {
     @POST
     @ApiOperation(
             consumes = MediaType.APPLICATION_JSON,
-            httpMethod = "GET",
+            httpMethod = "POST",
             value = "Download agent",
             notes = "",
             response = Response.class,
@@ -352,7 +352,7 @@ public interface DigitalDisplayService {
     @POST
     @ApiOperation(
             consumes = MediaType.APPLICATION_JSON,
-            httpMethod = "GET",
+            httpMethod = "POST",
             value = "Download agent",
             notes = "",
             response = Response.class,
@@ -375,7 +375,7 @@ public interface DigitalDisplayService {
     @POST
     @ApiOperation(
             consumes = MediaType.APPLICATION_JSON,
-            httpMethod = "GET",
+            httpMethod = "POST",
             value = "Download agent",
             notes = "",
             response = Response.class,

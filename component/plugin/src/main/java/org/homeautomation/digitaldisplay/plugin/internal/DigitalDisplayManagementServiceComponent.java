@@ -1,12 +1,14 @@
+package org.wso2.carbon.device.mgt.iot.digitaldisplay.plugin.internal;
+
 /*
  * Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 Inc. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.
- * you may obtain a copy of the License at
+ * You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
@@ -16,69 +18,69 @@
  * under the License.
  */
 
-package org.homeautomation.digitaldisplay.plugin.internal;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.homeautomation.digitaldisplay.plugin.exception.DigitalDisplayDeviceMgtPluginException;
-import org.homeautomation.digitaldisplay.plugin.impl.DigitalDisplayManagerService;
-import org.homeautomation.digitaldisplay.plugin.impl.util.DigitalDisplayUtils;
+import org.homeautomation.digitaldisplay.plugin.config.DigitalDisplayConfig;
+import org.homeautomation.digitaldisplay.plugin.impl.DigitalDisplayStartupListener;
+import org.homeautomation.digitaldisplay.plugin.internal.DigitalDisplayManagementDataHolder;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.component.ComponentContext;
-import org.wso2.carbon.device.mgt.common.spi.DeviceManagementService;
-/**
- * @scr.component name="org.homeautomation.digitaldisplay.plugin.internal.DigitalDisplayManagementServiceComponent"
- * immediate="true"
- */
-public class DigitalDisplayManagementServiceComponent {
+import org.wso2.carbon.core.ServerStartupObserver;
+import org.wso2.carbon.event.input.adapter.core.InputEventAdapterService;
 
-    private ServiceRegistration digitalDisplayServiceRegRef;
+/**
+ * @scr.component name="org.wso2.carbon.device.mgt.iot.digitaldisplay.plugin.internal
+ * .DigitalDisplayManagementServiceComponent"
+ * immediate="true"
+ * @scr.reference name="event.input.adapter.service"
+ * interface="org.wso2.carbon.event.input.adapter.core.InputEventAdapterService"
+ * cardinality="1..1"
+ * policy="dynamic"
+ * bind="setInputEventAdapterService"
+ * unbind="unsetInputEventAdapterService"
+ */
+
+public class DigitalDisplayManagementServiceComponent {
     private static final Log log = LogFactory.getLog(DigitalDisplayManagementServiceComponent.class);
+//    private ServiceRegistration firealarmServiceRegRef;
 
     protected void activate(ComponentContext ctx) {
-    	if (log.isDebugEnabled()) {
-            log.debug("Activating Digital Display Management Service Component");
+        if (log.isDebugEnabled()) {
+            log.debug("Activating Digital Display Device Management Service Component");
         }
         try {
+            DigitalDisplayConfig.initialize();
             BundleContext bundleContext = ctx.getBundleContext();
-            digitalDisplayServiceRegRef =
-                    bundleContext.registerService(DeviceManagementService.class.getName(), new
-                            DigitalDisplayManagerService(), null);
-            String setupOption = System.getProperty("setup");
-            if (setupOption != null) {
-                if (log.isDebugEnabled()) {
-                    log.debug("-Dsetup is enabled. Iot Device management repository schema initialization is about " +
-                                    "to begin");
-                }
-                try {
-                    DigitalDisplayUtils.setupDeviceManagementSchema();
-                } catch (DigitalDisplayDeviceMgtPluginException e) {
-                    log.error("Exception occurred while initializing device management database schema", e);
-                }
-            }
+            bundleContext.registerService(ServerStartupObserver.class.getName(), new DigitalDisplayStartupListener(),
+                    null);
             if (log.isDebugEnabled()) {
-                log.debug("Digital Display  Management Service Component has been successfully activated");
+                log.debug("Digital Display Device Management Service Component has been successfully activated");
             }
         } catch (Throwable e) {
-            log.error("Error occurred while activating Digital Display Management Service Component", e);
+            log.error("Error occurred while activating Digital Display Device Management Service Component", e);
         }
     }
 
     protected void deactivate(ComponentContext ctx) {
         if (log.isDebugEnabled()) {
-            log.debug("De-activating DigitalDisplay Management Service Component");
+            log.debug("De-activating Digital Display Device Management Service Component");
         }
-        try {
-            if (digitalDisplayServiceRegRef != null) {
-                digitalDisplayServiceRegRef.unregister();
-            }
-            if (log.isDebugEnabled()) {
-                log.debug("DigitalDisplay Management Service Component has been successfully de-activated");
-            }
-        } catch (Throwable e) {
-            log.error("Error occurred while de-activating Iot Device Management bundle", e);
-        }
+    }
+
+    /**
+     * Initialize the Input EventAdapter Service dependency
+     *
+     * @param inputEventAdapterService Input EventAdapter Service reference
+     */
+    protected void setInputEventAdapterService(InputEventAdapterService inputEventAdapterService) {
+        DigitalDisplayManagementDataHolder.getInstance().setInputEventAdapterService(inputEventAdapterService);
+    }
+
+    /**
+     * De-reference the Input EventAdapter Service dependency.
+     */
+    protected void unsetInputEventAdapterService(InputEventAdapterService inputEventAdapterService) {
+        DigitalDisplayManagementDataHolder.getInstance().setInputEventAdapterService(null);
     }
 
 }

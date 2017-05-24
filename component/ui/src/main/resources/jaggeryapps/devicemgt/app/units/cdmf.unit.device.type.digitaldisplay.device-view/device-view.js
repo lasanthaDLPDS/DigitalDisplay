@@ -21,6 +21,7 @@ function onRequest(context) {
     var log = new Log("cdmf.unit.device.type.digitaldisplay.device-view.js");
     var deviceType = context.uriParams.deviceType;
     var deviceId = request.getParameter("id");
+    var deviceViewData = {};
 
     var getProperty = require("process").getProperty;
     var port = getProperty("carbon.https.port");
@@ -31,10 +32,18 @@ function onRequest(context) {
         var device = deviceModule.viewDevice(deviceType, deviceId);
 
         if (device && device.status != "error") {
-            return {"device": device.content};
+            deviceViewData["device"]=device.content;
         } else {
             response.sendError(404, "Device Id " + deviceId + "of type " + deviceType + " cannot be found!");
             exit();
         }
     }
+
+    var autoCompleteParams = [
+        {"name" : "deviceId", "value" : deviceId}
+    ];
+
+    deviceViewData["autoCompleteParams"] = autoCompleteParams;
+    log.info(deviceViewData);
+    return deviceViewData;
 }
