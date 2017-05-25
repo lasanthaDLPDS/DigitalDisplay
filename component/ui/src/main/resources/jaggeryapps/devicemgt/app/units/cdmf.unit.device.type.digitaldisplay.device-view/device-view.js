@@ -32,18 +32,18 @@ function onRequest(context) {
         var device = deviceModule.viewDevice(deviceType, deviceId);
 
         if (device && device.status != "error") {
-            deviceViewData["device"]=device.content;
+            return {"device":device.content};
         } else {
             response.sendError(404, "Device Id " + deviceId + "of type " + deviceType + " cannot be found!");
             exit();
         }
     }
 
-    var autoCompleteParams = [
-        {"name" : "deviceId", "value" : deviceId}
-    ];
-
-    deviceViewData["autoCompleteParams"] = autoCompleteParams;
-    log.info(deviceViewData);
-    return deviceViewData;
+    // var autoCompleteParams = [
+    //     {"name" : "deviceId", "value" : deviceId}
+    // ];
+    //
+    // deviceViewData["autoCompleteParams"] = autoCompleteParams;
+    // log.info(deviceViewData);
+    // return deviceViewData;
 }
