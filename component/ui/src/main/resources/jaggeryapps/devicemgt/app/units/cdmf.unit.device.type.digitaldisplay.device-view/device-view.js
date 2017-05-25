@@ -17,33 +17,29 @@
  */
 
 function onRequest(context) {
-
-    var log = new Log("cdmf.unit.device.type.digitaldisplay.device-view.js");
+    var log = new Log("device-view.js");
     var deviceType = context.uriParams.deviceType;
     var deviceId = request.getParameter("id");
-    var deviceViewData = {};
+    var devicemgtProps = require("/app/modules/conf-reader/main.js")["conf"];
+    var autoCompleteParams = [
+        {"name": "deviceId", "value": deviceId}
+    ];
 
-    var getProperty = require("process").getProperty;
-    var port = getProperty("carbon.https.port");
-    var host = getProperty("carbon.local.ip");
-    var sessionId = session.getId();
     if (deviceType != null && deviceType != undefined && deviceId != null && deviceId != undefined) {
-        var deviceModule = require("/app/modules/business-controllers/device.js").deviceModule;
+        var deviceModule = require("/app/modules/business-controllers/device.js")["deviceModule"];
         var device = deviceModule.viewDevice(deviceType, deviceId);
-
         if (device && device.status != "error") {
-            return {"device":device.content};
+            var anchor = {"device": {"id": device.content.deviceIdentifier, "type": device.content.type}};
+            return {
+                "device": device.content,
+                "autoCompleteParams": autoCompleteParams,
+                "encodedFeaturePayloads": "",
+                "portalUrl": devicemgtProps['portalURL'],
+                "anchor": JSON.stringify(anchor)
+            };
         } else {
-            response.sendError(404, "Device Id " + deviceId + "of type " + deviceType + " cannot be found!");
+            response.sendError(404, "Device Id " + deviceId + " of type " + deviceType + " cannot be found!");
             exit();
         }
     }
-
-    // var autoCompleteParams = [
-    //     {"name" : "deviceId", "value" : deviceId}
-    // ];
-    //
-    // deviceViewData["autoCompleteParams"] = autoCompleteParams;
-    // log.info(deviceViewData);
-    // return deviceViewData;
 }

@@ -55,7 +55,7 @@ public interface DigitalDisplayService {
     String SCOPE = "scope";
 
 
-    @Path("device/{device_id}")
+    @Path("device/{deviceId}")
     @PUT
     @ApiOperation(
             consumes = MediaType.APPLICATION_JSON,
@@ -70,9 +70,9 @@ public interface DigitalDisplayService {
                     })
             }
     )
-    Response updateDevice(@PathParam("device_id") String deviceId, @QueryParam("name") String name);
+    Response updateDevice(@PathParam("deviceId") String deviceId, @QueryParam("name") String name);
 
-    @Path("device/{device_id}")
+    @Path("device/{deviceId}")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -89,9 +89,9 @@ public interface DigitalDisplayService {
                     })
             }
     )
-    Response getDevice(@PathParam("device_id") String deviceId);
+    Response getDevice(@PathParam("deviceId") String deviceId);
 
-    @Path("device/{device_id}")
+    @Path("device/{deviceId}")
     @DELETE
     @ApiOperation(
             consumes = MediaType.APPLICATION_JSON,
@@ -106,7 +106,7 @@ public interface DigitalDisplayService {
                     })
             }
     )
-    Response removeDevice(@PathParam("device_id") String deviceId);
+    Response removeDevice(@PathParam("deviceId") String deviceId);
 
     @Path("device/download")
     @GET
