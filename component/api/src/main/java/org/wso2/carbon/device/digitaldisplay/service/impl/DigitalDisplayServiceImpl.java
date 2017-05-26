@@ -24,6 +24,8 @@ import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.device.digitaldisplay.service.impl.constants.DigitalDisplayConstants;
 import org.wso2.carbon.device.digitaldisplay.service.impl.exception.DigitalDisplayException;
 import org.wso2.carbon.device.digitaldisplay.service.impl.transport.mqtt.MqttConfig;
+import org.wso2.carbon.device.mgt.common.operation.mgt.Operation;
+import org.wso2.carbon.device.mgt.core.operation.mgt.CommandOperation;
 import org.wso2.carbon.device.digitaldisplay.service.impl.transport.TransportHandlerException;
 import org.wso2.carbon.device.digitaldisplay.service.impl.util.APIUtil;
 import org.wso2.carbon.device.digitaldisplay.service.impl.util.DigitalDisplayMQTTConnector;
