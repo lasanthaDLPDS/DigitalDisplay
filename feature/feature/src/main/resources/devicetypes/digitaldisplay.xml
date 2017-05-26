@@ -37,7 +37,7 @@
         <Feature code="get">
             <Name>Get Device Data</Name>
             <Description>Get device data</Description>
-            <Operation context="/digitaldisplay/device/{deviceId}" method="GET">
+            <Operation context="/digitaldisplay/device/{deviced}" method="GET">
             </Operation>
         </Feature>
         <Feature code="restart_browser">

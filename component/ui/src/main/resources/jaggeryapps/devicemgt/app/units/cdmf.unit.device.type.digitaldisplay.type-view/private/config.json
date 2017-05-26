@@ -5,6 +5,64 @@
         "downloadAgentUri": "digitaldisplay/device/download",
         "scopes": [
             "perm:digitaldisplay:enroll"
-        ]
+        ],
+        "features": {
+            "remove": {
+                "icon": "fw fw-delete",
+                "permission": "/device-mgt/devices/enroll/digitaldisplay"
+            },
+            "update": {
+                "icon": "fw fw-publish",
+                "permission": "/device-mgt/devices/enroll/digitaldisplay"
+            },
+            "get": {
+                "icon": "fw fw-sort-down",
+                "permission": "/device-mgt/devices/enroll/digitaldisplay"
+            },
+            "restart_browser": {
+                "icon": "fw fw-fan",
+                "permission": "/device-mgt/devices/enroll/digitaldisplay"
+            },
+            "terminate": {
+                "icon": "fw fw-circle",
+                "permission": "/device-mgt/devices/enroll/digitaldisplay"
+            },
+            "restart_display": {
+                "icon": "fw fw-refresh",
+                "permission": "/device-mgt/devices/enroll/digitaldisplay"
+            },
+            "change_slides": {
+                "icon": "fw fw-tiles",
+                "permission": "/device-mgt/devices/enroll/digitaldisplay"
+            },
+            "upload_content": {
+                "icon": "fw fw-upload",
+                "permission": "/device-mgt/devices/enroll/digitaldisplay"
+            },
+            "add_new_resources": {
+                "icon": "fw fw-import",
+                "permission": "/device-mgt/devices/enroll/digitaldisplay"
+            },
+            "remove_resource": {
+                "icon": "fw fw-hide",
+                "permission": "/device-mgt/devices/enroll/digitaldisplay"
+            },
+            "restart_server": {
+                "icon": "fw fw-loader5",
+                "permission": "/device-mgt/devices/enroll/digitaldisplay"
+            },
+            "get_screenshot": {
+                "icon": "fw fw-display",
+                "permission": "/device-mgt/devices/enroll/digitaldisplay"
+            },
+            "get_status": {
+                "icon": "fw fw-raspberry",
+                "permission": "/device-mgt/devices/enroll/digitaldisplay"
+            },
+            "get_content_list": {
+                "icon": "fw fw-list",
+                "permission": "/device-mgt/devices/enroll/digitaldisplay"
+            }
+        }
     }
 }
