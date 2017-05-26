@@ -32,7 +32,10 @@ ps aux|grep httpserver.py|awk '{print $2}'|xargs kill -9
 #xdotool mousemove 0 0
 #xdotool search -name LXTerminal windowunmap
 #cd ~/
-unzip wso2_digital_display.zip -d ./
+if [ -e wso2_digital_display.zip ]; then
+	unzip wso2_digital_display.zip > /dev/null && rm -rf wso2_digital_display.zip > /dev/null
+fi
+
 mkdir -p tmp/dd-kernel-test
 python displayagent.py
 
