@@ -22,7 +22,8 @@ function onRequest(context) {
     var deviceId = request.getParameter("id");
     var devicemgtProps = require("/app/modules/conf-reader/main.js")["conf"];
     var autoCompleteParams = [
-        {"name": "deviceId", "value": deviceId}
+        {"name": "deviceId", "value": deviceId},
+        {"name": "sessionId", "value": genUID()}
     ];
 
     if (deviceType != null && deviceType != undefined && deviceId != null && deviceId != undefined) {
@@ -42,4 +43,8 @@ function onRequest(context) {
             exit();
         }
     }
+}
+
+function genUID() {
+    return 'id-' + Math.random().toString(36).substr(2, 16);
 }
