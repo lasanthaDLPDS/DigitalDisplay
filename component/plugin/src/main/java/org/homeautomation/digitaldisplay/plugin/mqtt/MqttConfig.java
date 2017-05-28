@@ -23,8 +23,6 @@ import org.apache.commons.logging.LogFactory;
 import org.homeautomation.digitaldisplay.plugin.config.DeviceManagementConfiguration;
 import org.homeautomation.digitaldisplay.plugin.config.DigitalDisplayConfig;
 import org.homeautomation.digitaldisplay.plugin.config.EventListenerConfiguration;
-
-
 import java.util.List;
 
 public class MqttConfig {

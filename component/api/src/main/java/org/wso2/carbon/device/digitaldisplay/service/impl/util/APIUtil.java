@@ -67,6 +67,11 @@ public class APIUtil {
 		return apiManagementProviderService;
 	}
 
+	public static String getAuthenticatedUserTenantDomain() {
+		PrivilegedCarbonContext threadLocalCarbonContext = PrivilegedCarbonContext.getThreadLocalCarbonContext();
+		return threadLocalCarbonContext.getTenantDomain();
+	}
+
 	public static PlatformConfigurationManagementService getTenantConfigurationManagementService() {
 		PrivilegedCarbonContext ctx = PrivilegedCarbonContext.getThreadLocalCarbonContext();
 		PlatformConfigurationManagementService tenantConfigurationManagementService =

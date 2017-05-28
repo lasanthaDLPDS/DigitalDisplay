@@ -8,7 +8,6 @@ import org.json.JSONObject;
 import org.wso2.carbon.device.digitaldisplay.service.impl.constants.DigitalDisplayConstants;
 import org.wso2.carbon.device.digitaldisplay.service.impl.model.ScreenShotModel;
 import org.wso2.carbon.device.digitaldisplay.service.impl.transport.mqtt.MQTTTransportHandler;
-import org.wso2.carbon.device.digitaldisplay.service.impl.transport.mqtt.MqttConfig;
 import org.wso2.carbon.device.digitaldisplay.service.impl.transport.TransportHandlerException;
 import org.wso2.carbon.device.digitaldisplay.service.impl.websocket.DigitalDisplayWebSocketServerEndPoint;
 

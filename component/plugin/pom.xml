@@ -29,6 +29,7 @@
     <modelVersion>4.0.0</modelVersion>
     <version>3.0.0</version>
     <artifactId>org.homeautomation.digitaldisplay.plugin</artifactId>
+    <!--<artifactId>${project-base-package}.plugin</artifactId>-->
     <packaging>bundle</packaging>
     <name>Digital Display Plugin for CDMF</name>
     <url>http://wso2.org</url>
@@ -55,10 +56,10 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <!--<Bundle-SymbolicName>org.homeautomation.digitaldisplay.plugin</Bundle-SymbolicName>-->
-                        <!--<Bundle-Name>${project.groupId}.digitaldisplay.plugin</Bundle-Name>-->
-                        <!--<Bundle-Version>2.1.0-SNAPSHOT</Bundle-Version>-->
-                        <!--<Bundle-Description>IoT Server Impl Bundle</Bundle-Description>-->
+                        <Bundle-SymbolicName>org.homeautomation.digitaldisplay.plugin</Bundle-SymbolicName>
+                        <Bundle-Name>org.homeautomation.digitaldisplay.plugin</Bundle-Name>
+                        <Bundle-Version>3.0.0</Bundle-Version>
+                        <Bundle-Description>IoT Server Impl Bundle</Bundle-Description>
                         <Private-Package>org.homeautomation.digitaldisplay.plugin.internal</Private-Package>
                         <Import-Package>
                             org.wso2.carbon.device.mgt.core.service,

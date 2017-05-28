@@ -37,13 +37,13 @@
         <Feature code="get">
             <Name>Get Device Data</Name>
             <Description>Get device data</Description>
-            <Operation context="/digitaldisplay/device/{deviced}" method="GET">
+            <Operation context="/digitaldisplay/device/{deviceId}" method="GET">
             </Operation>
         </Feature>
         <Feature code="restart_browser">
             <Name>Restart Browser</Name>
             <Description>Restart the browser running in RPI</Description>
-            <Operation context="/digitaldisplay/device/{deviceId}/restart-browser}" method="POST">
+            <Operation context="/digitaldisplay/device/{deviceId}/restart-browser" method="POST">
                 <QueryParameters>
                     <Parameter>sessionId</Parameter>
                 </QueryParameters>
@@ -52,7 +52,7 @@
         <Feature code="terminate">
             <Name>Terminate Display</Name>
             <Description>Terminate Running Display</Description>
-            <Operation context="/digitaldisplay/device/{deviceId}/terminate-display}" method="POST">
+            <Operation context="/digitaldisplay/device/{deviceId}/terminate-display" method="POST">
                 <QueryParameters>
                     <Parameter>sessionId</Parameter>
                 </QueryParameters>
@@ -61,7 +61,7 @@
         <Feature code="restart_display">
             <Name>Restart Display</Name>
             <Description>Restart the running display</Description>
-            <Operation context="/digitaldisplay/device/{deviceId}/restart-display}" method="POST">
+            <Operation context="/digitaldisplay/device/{deviceId}/restart-display" method="POST">
                 <QueryParameters>
                     <Parameter>sessionId</Parameter>
                 </QueryParameters>
@@ -70,7 +70,7 @@
         <Feature code="change_slides">
             <Name>Change Slides</Name>
             <Description>Change the running slide sequence</Description>
-            <Operation context="/digitaldisplay/device/{deviceId}/edit-sequence}" method="POST">
+            <Operation context="/digitaldisplay/device/{deviceId}/edit-sequence" method="POST">
                 <FormParameters>
                     <Parameter>name</Parameter>
                     <Parameter>attribute</Parameter>

@@ -23,10 +23,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.device.digitaldisplay.service.impl.constants.DigitalDisplayConstants;
 import org.wso2.carbon.device.digitaldisplay.service.impl.exception.DigitalDisplayException;
-import org.wso2.carbon.device.digitaldisplay.service.impl.transport.mqtt.MqttConfig;
 import org.wso2.carbon.device.mgt.common.operation.mgt.Operation;
+import org.wso2.carbon.device.mgt.common.operation.mgt.OperationManagementException;
 import org.wso2.carbon.device.mgt.core.operation.mgt.CommandOperation;
-import org.wso2.carbon.device.digitaldisplay.service.impl.transport.TransportHandlerException;
+import org.wso2.carbon.device.mgt.common.*;
 import org.wso2.carbon.device.digitaldisplay.service.impl.util.APIUtil;
 import org.wso2.carbon.device.digitaldisplay.service.impl.util.DigitalDisplayMQTTConnector;
 import org.wso2.carbon.device.digitaldisplay.service.impl.util.ZipArchive;
@@ -52,8 +52,7 @@ import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
-import java.util.Date;
-import java.util.UUID;
+import java.util.*;
 
 public class DigitalDisplayServiceImpl implements DigitalDisplayService{
 
@@ -256,47 +255,63 @@ public class DigitalDisplayServiceImpl implements DigitalDisplayService{
 
     public Response restartBrowser(String deviceId, String sessionId) {
         try {
-            sendCommandViaMQTT(deviceId, sessionId + "::" + DigitalDisplayConstants.RESTART_BROWSER_CONSTANT + "::", "");
+            sendCommandViaMQTT(deviceId, sessionId + "::" + DigitalDisplayConstants.RESTART_BROWSER_CONSTANT + "::", "","restart-browser");
             return Response.ok().build();
         } catch (DeviceManagementException e) {
             return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
         } catch (DigitalDisplayException e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
+        } catch (OperationManagementException e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        } catch (InvalidDeviceException e) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
 
     public Response terminateDisplay(String deviceId, String sessionId) {
         try {
-            sendCommandViaMQTT(deviceId, sessionId + "::" + DigitalDisplayConstants.TERMINATE_DISPLAY_CONSTANT + "::", "");
+            sendCommandViaMQTT(deviceId, sessionId + "::" + DigitalDisplayConstants.TERMINATE_DISPLAY_CONSTANT + "::", "","terminate-display");
             return Response.ok().build();
         } catch (DeviceManagementException e) {
             return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
         } catch (DigitalDisplayException e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
+        } catch (OperationManagementException e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        } catch (InvalidDeviceException e) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
 
     }
 
     public Response restartDisplay(String deviceId, String sessionId) {
         try {
-            sendCommandViaMQTT(deviceId, sessionId + "::" + DigitalDisplayConstants.RESTART_DISPLAY_CONSTANT + "::", "");
+            sendCommandViaMQTT(deviceId, sessionId + "::" + DigitalDisplayConstants.RESTART_DISPLAY_CONSTANT + "::", "","restart-display");
             return Response.ok().build();
         } catch (DeviceManagementException e) {
             return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
         } catch (DigitalDisplayException e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
+        } catch (OperationManagementException e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        } catch (InvalidDeviceException e) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
 
     public Response editSequence(String deviceId, String name, String attribute, String newValue, String sessionId) {
         try {
             String params = name + "|" + attribute + "|" + newValue;
-            sendCommandViaMQTT(deviceId, sessionId + "::" + DigitalDisplayConstants.EDIT_SEQUENCE_CONSTANT + "::", params);
+            sendCommandViaMQTT(deviceId, sessionId + "::" + DigitalDisplayConstants.EDIT_SEQUENCE_CONSTANT + "::", params,"edit-sequence");
             return Response.ok().build();
         } catch (DeviceManagementException e) {
             return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
         } catch (DigitalDisplayException e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
+        } catch (OperationManagementException e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        } catch (InvalidDeviceException e) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
 
@@ -304,12 +319,16 @@ public class DigitalDisplayServiceImpl implements DigitalDisplayService{
         try {
             String params = remotePath + "|" + screenName;
             sendCommandViaMQTT(deviceId, sessionId + "::" + DigitalDisplayConstants.UPLOAD_CONTENT_CONSTANT + "::",
-                    params);
+                    params,"upload-content");
             return Response.ok().build();
         } catch (DeviceManagementException e) {
             return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
         } catch (DigitalDisplayException e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
+        } catch (OperationManagementException e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        } catch (InvalidDeviceException e) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
 
@@ -323,67 +342,91 @@ public class DigitalDisplayServiceImpl implements DigitalDisplayService{
                 params = type + "|" + time + "|" + path + "|" + name +
                         "|" + "after=" + position;
             }
-            sendCommandViaMQTT(deviceId, sessionId + "::" + DigitalDisplayConstants.ADD_NEW_RESOURCE_CONSTANT + "::", params);
+            sendCommandViaMQTT(deviceId, sessionId + "::" + DigitalDisplayConstants.ADD_NEW_RESOURCE_CONSTANT + "::", params,"add-resource");
             return Response.ok().build();
         } catch (DeviceManagementException e) {
             return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
         } catch (DigitalDisplayException e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
+        } catch (OperationManagementException e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        } catch (InvalidDeviceException e) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
 
     public Response removeResource(String deviceId, String name, String sessionId) {
         try {
-            sendCommandViaMQTT(deviceId, sessionId + "::" + DigitalDisplayConstants.REMOVE_RESOURCE_CONSTANT + "::", name);
+            sendCommandViaMQTT(deviceId, sessionId + "::" + DigitalDisplayConstants.REMOVE_RESOURCE_CONSTANT + "::", name,"remove-resource");
             return Response.ok().build();
         } catch (DeviceManagementException e) {
             return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
         } catch (DigitalDisplayException e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
+        } catch (OperationManagementException e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        } catch (InvalidDeviceException e) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
 
     public Response restartServer(String deviceId, String sessionId) {
         try {
-            sendCommandViaMQTT(deviceId, sessionId + "::" + DigitalDisplayConstants.RESTART_SERVER_CONSTANT + "::", "");
+            sendCommandViaMQTT(deviceId, sessionId + "::" + DigitalDisplayConstants.RESTART_SERVER_CONSTANT + "::", "","restart-server");
             return Response.ok().build();
         } catch (DeviceManagementException e) {
             return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
         } catch (DigitalDisplayException e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
+        } catch (OperationManagementException e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        } catch (InvalidDeviceException e) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
 
     public Response showScreenshot(String deviceId, String sessionId) {
         try {
-            sendCommandViaMQTT(deviceId, sessionId + "::" + DigitalDisplayConstants.SCREENSHOT_CONSTANT + "::", "");
+            sendCommandViaMQTT(deviceId, sessionId + "::" + DigitalDisplayConstants.SCREENSHOT_CONSTANT + "::", "","screenshot");
             return Response.ok().build();
         } catch (DeviceManagementException e) {
             return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
         } catch (DigitalDisplayException e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
+        } catch (OperationManagementException e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        } catch (InvalidDeviceException e) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
 
     public Response getDevicestatus(String deviceId, String sessionId) {
         try {
-            sendCommandViaMQTT(deviceId, sessionId + "::" + DigitalDisplayConstants.GET_DEVICE_STATUS_CONSTANT + "::", "");
+            sendCommandViaMQTT(deviceId, sessionId + "::" + DigitalDisplayConstants.GET_DEVICE_STATUS_CONSTANT + "::", "","get-device-status");
             return Response.ok().build();
         } catch (DeviceManagementException e) {
             return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
         } catch (DigitalDisplayException e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
+        } catch (OperationManagementException e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        } catch (InvalidDeviceException e) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
 
     public Response getResources(String deviceId, String sessionId) {
         try {
-            sendCommandViaMQTT(deviceId, sessionId + "::" + DigitalDisplayConstants.GET_CONTENTLIST_CONSTANT + "::", "");
+            sendCommandViaMQTT(deviceId, sessionId + "::" + DigitalDisplayConstants.GET_CONTENTLIST_CONSTANT + "::", "","get-content-list");
             return Response.ok().build();
         } catch (DeviceManagementException e) {
             return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
         } catch (DigitalDisplayException e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
+        } catch (OperationManagementException e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        } catch (InvalidDeviceException e) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
 
@@ -396,16 +439,38 @@ public class DigitalDisplayServiceImpl implements DigitalDisplayService{
      * @throws DeviceManagementException
      * @throws DigitalDisplayException
      */
-    private void sendCommandViaMQTT(String deviceId, String operation, String param)
-            throws DeviceManagementException, DigitalDisplayException {
-        String topic = String.format(DigitalDisplayConstants.PUBLISH_TOPIC, deviceId);
+    private void sendCommandViaMQTT(String deviceId, String operation, String param, String code)
+            throws DeviceManagementException, DigitalDisplayException, OperationManagementException, InvalidDeviceException {
+//        String topic = String.format(DigitalDisplayConstants.PUBLISH_TOPIC, deviceId);
+//        String payload = operation + param;
+//        try {
+//            digitalDisplayMQTTConnector.publishToDigitalDisplay(topic, payload, 2, false);
+//        } catch (TransportHandlerException e) {
+//            throw new DigitalDisplayException("Error while sending the message",e);
+//        } finally {
+//            PrivilegedCarbonContext.endTenantFlow();
+//        }
+
+        String topic = String.format(DigitalDisplayConstants.PUBLISH_TOPIC, APIUtil.getAuthenticatedUserTenantDomain(),
+                DigitalDisplayConstants.DEVICE_TYPE, deviceId);
+
         String payload = operation + param;
-        try {
-            digitalDisplayMQTTConnector.publishToDigitalDisplay(topic, payload, 2, false);
-        } catch (TransportHandlerException e) {
-            throw new DigitalDisplayException("Error while sending the message",e);
-        } finally {
-            PrivilegedCarbonContext.endTenantFlow();
-        }
+
+        Operation commandOp = new CommandOperation();
+        commandOp.setCode(code);
+        commandOp.setType(Operation.Type.COMMAND);
+        commandOp.setEnabled(true);
+        commandOp.setPayLoad(payload);
+
+        Properties props = new Properties();
+        props.setProperty(DigitalDisplayConstants.MQTT_ADAPTER_TOPIC_PROPERTY_NAME, topic);
+        commandOp.setProperties(props);
+
+        List<DeviceIdentifier> deviceIdentifiers = new ArrayList<>();
+        deviceIdentifiers.add(new DeviceIdentifier(deviceId, DigitalDisplayConstants.DEVICE_TYPE));
+        APIUtil.getDeviceManagementService().addOperation(DigitalDisplayConstants.DEVICE_TYPE, commandOp, deviceIdentifiers);
     }
 }
+//
+//    }
+//}
