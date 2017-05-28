@@ -442,15 +442,6 @@ public class DigitalDisplayServiceImpl implements DigitalDisplayService{
      */
     private void sendCommandViaMQTT(String deviceId, String operation, String param, String code)
             throws DeviceManagementException, DigitalDisplayException, OperationManagementException, InvalidDeviceException {
-//        String topic = String.format(DigitalDisplayConstants.PUBLISH_TOPIC, deviceId);
-//        String payload = operation + param;
-//        try {
-//            digitalDisplayMQTTConnector.publishToDigitalDisplay(topic, payload, 2, false);
-//        } catch (TransportHandlerException e) {
-//            throw new DigitalDisplayException("Error while sending the message",e);
-//        } finally {
-//            PrivilegedCarbonContext.endTenantFlow();
-//        }
 
         String topic = String.format(DigitalDisplayConstants.PUBLISH_TOPIC, APIUtil.getAuthenticatedUserTenantDomain(),
                 DigitalDisplayConstants.DEVICE_TYPE, deviceId);
@@ -472,6 +463,3 @@ public class DigitalDisplayServiceImpl implements DigitalDisplayService{
         APIUtil.getDeviceManagementService().addOperation(DigitalDisplayConstants.DEVICE_TYPE, commandOp, deviceIdentifiers);
     }
 }
-//
-//    }
-//}

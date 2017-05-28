@@ -21,7 +21,7 @@ import java.util.concurrent.ScheduledFuture;
 public class DigitalDisplayMQTTConnector extends MQTTTransportHandler {
 
     private static Log log = LogFactory.getLog(DigitalDisplayMQTTConnector.class);
-    private static final String MQTT_TOPIC_APPENDER = "wso2/iot";
+    private static final String MQTT_TOPIC_APPENDER = "carbon.super";
     private static final String subscribeTopic =
             MQTT_TOPIC_APPENDER + "/" + DigitalDisplayConstants.DEVICE_TYPE + "/+/digitaldisplay_publisher";
 
