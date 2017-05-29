@@ -210,7 +210,7 @@ public class DigitalDisplayServiceImpl implements DigitalDisplayService{
 
         ZipUtil ziputil = new ZipUtil();
         ZipArchive zipFile = ziputil.createZipFile(owner, DigitalDisplayConstants.DEVICE_TYPE, deviceId, deviceName,
-                accessToken, refreshToken, consumerKey, consumerSecret);
+                accessToken, refreshToken, consumerKey, consumerSecret, apiApplicationKey.toString());
         return zipFile;
     }
 

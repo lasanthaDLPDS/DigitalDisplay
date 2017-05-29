@@ -51,6 +51,8 @@ public class DigitalDisplayConstants {
     public static final String CONSUMER_KEY = "COMSUMER_KEY";
     public static final String CONSUMER_SECRET = "CONSUMER_SECRET";
     public static final String SERVER_IP = "SERVER_IP";
+    public static final String API_APPLICATION_KEY = "API_APPLICATION_KEY";
+
 
     public static final String APIM_APPLICATION_TOKEN_VALIDITY_PERIOD = "3600";
 

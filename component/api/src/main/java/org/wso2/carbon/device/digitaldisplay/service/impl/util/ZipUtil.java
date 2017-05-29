@@ -56,7 +56,7 @@ public class ZipUtil {
     public static final String HOST_NAME = "HostName";
 
     public ZipArchive createZipFile(String owner, String deviceType, String deviceId, String deviceName,
-                                    String token, String refreshToken, String consumerKey, String consumerSecret)
+                                    String token, String refreshToken, String consumerKey, String consumerSecret, String apiApplicationKey)
             throws DeviceManagementException {
 
         String sketchFolder = "repository" + File.separator + "resources" + File.separator + "sketches";
@@ -87,6 +87,8 @@ public class ZipUtil {
                 }
             }
 
+            String base64EncodedApplicationKey = getBase64EncodedAPIAppKey(apiApplicationKey).trim();
+
             Map<String, String> contextParams = new HashMap<>();
             contextParams.put(DigitalDisplayConstants.DEVICE_OWNER, owner);
             contextParams.put(DigitalDisplayConstants.DEVICE_ID, deviceId);
@@ -97,6 +99,7 @@ public class ZipUtil {
             contextParams.put(DigitalDisplayConstants.CONSUMER_KEY, consumerKey);
             contextParams.put(DigitalDisplayConstants.CONSUMER_SECRET, consumerSecret);
             contextParams.put(DigitalDisplayConstants.SERVER_IP, iotServerIP);
+            contextParams.put(DigitalDisplayConstants.API_APPLICATION_KEY, base64EncodedApplicationKey);
 
             ZipArchive zipFile;
             zipFile = getSketchArchive(archivesPath, templateSketchPath, contextParams, deviceName);

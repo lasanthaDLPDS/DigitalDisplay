@@ -134,6 +134,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
+                <version>${maven-antrun-plugin.version}</version>
                 <executions>
                     <execution>
                         <!-- Creating Digital Display Plugin Management schema -->
@@ -172,6 +173,7 @@
             <plugin>
                 <groupId>org.wso2.maven</groupId>
                 <artifactId>carbon-p2-plugin</artifactId>
+                <version>${carbon-p2-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>p2-feature-generation</id>

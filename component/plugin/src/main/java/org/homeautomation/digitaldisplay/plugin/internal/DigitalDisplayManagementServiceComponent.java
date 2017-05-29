@@ -42,7 +42,6 @@ import org.wso2.carbon.event.input.adapter.core.InputEventAdapterService;
 
 public class DigitalDisplayManagementServiceComponent {
     private static final Log log = LogFactory.getLog(DigitalDisplayManagementServiceComponent.class);
-//    private ServiceRegistration firealarmServiceRegRef;
 
     protected void activate(ComponentContext ctx) {
         if (log.isDebugEnabled()) {

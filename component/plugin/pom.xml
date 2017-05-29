@@ -29,7 +29,6 @@
     <modelVersion>4.0.0</modelVersion>
     <version>3.0.0</version>
     <artifactId>org.homeautomation.digitaldisplay.plugin</artifactId>
-    <!--<artifactId>${project-base-package}.plugin</artifactId>-->
     <packaging>bundle</packaging>
     <name>Digital Display Plugin for CDMF</name>
     <url>http://wso2.org</url>
