@@ -37,6 +37,7 @@ public class MqttConfig {
     private String qos;
     private String scopes;
     private String clearSession;
+    private String password;
 
     private MqttConfig() {
         DeviceManagementConfiguration deviceManagementConfiguration = DigitalDisplayConfig.getInstance()
@@ -67,6 +68,9 @@ public class MqttConfig {
                         break;
                     case "clearSession":
                         clearSession = property.getValue();
+                        break;
+                    case "password":
+                        password = property.getValue();
                         break;
                 }
             }
@@ -103,5 +107,9 @@ public class MqttConfig {
 
     public String getClearSession() {
         return clearSession;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

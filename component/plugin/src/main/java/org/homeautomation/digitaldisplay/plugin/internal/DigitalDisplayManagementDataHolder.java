@@ -20,7 +20,7 @@ package org.homeautomation.digitaldisplay.plugin.internal;
 import org.wso2.carbon.event.input.adapter.core.InputEventAdapterService;
 
 /**
- * DataHolder class of virtual firealarm plugins component.
+ * DataHolder class of Digital Display plugins component.
  */
 public class DigitalDisplayManagementDataHolder {
 

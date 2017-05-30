@@ -81,6 +81,7 @@ public class DigitalDisplayUtils {
         mqttAdapterProperties.put(DigitalDisplayConstants.CLEAR_SESSION_PROPERTY_KEY, MqttConfig.getInstance()
                 .getClearSession());
         mqttAdapterProperties.put(DigitalDisplayConstants.QOS_PROPERTY_KEY, MqttConfig.getInstance().getQos());
+        mqttAdapterProperties.put(DigitalDisplayConstants.PASSWORD_PROPERTY_KEY, MqttConfig.getInstance().getPassword());
         mqttAdapterProperties.put(DigitalDisplayConstants.CLIENT_ID_PROPERTY_KEY, "");
         mqttAdapterProperties.put(DigitalDisplayConstants.TOPIC, DigitalDisplayConstants.SUBSCRIBED_TOPIC);
         mqttAdapterProperties.put(DigitalDisplayConstants.CONTENT_TRANSFORMATION,
