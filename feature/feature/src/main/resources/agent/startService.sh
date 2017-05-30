@@ -37,6 +37,8 @@ if [ -e wso2_digital_display.zip ]; then
 fi
 
 mkdir -p tmp/dd-kernel-test
+cp deviceConfig.properties wso2_digital_display
+cd wso2_digital_display
 python displayagent.py
 
 while true; do

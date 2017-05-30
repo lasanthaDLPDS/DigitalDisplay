@@ -1,5 +1,3 @@
-package org.wso2.carbon.device.mgt.iot.digitaldisplay.plugin.internal;
-
 /*
  * Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
@@ -18,6 +16,8 @@ package org.wso2.carbon.device.mgt.iot.digitaldisplay.plugin.internal;
  * under the License.
  */
 
+package org.homeautomation.digitaldisplay.plugin.internal;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.homeautomation.digitaldisplay.plugin.config.DigitalDisplayConfig;
@@ -29,7 +29,7 @@ import org.wso2.carbon.core.ServerStartupObserver;
 import org.wso2.carbon.event.input.adapter.core.InputEventAdapterService;
 
 /**
- * @scr.component name="org.wso2.carbon.device.mgt.iot.digitaldisplay.plugin.internal
+ * @scr.component name="org.homeautomation.digitaldisplay.plugin.internal
  * .DigitalDisplayManagementServiceComponent"
  * immediate="true"
  * @scr.reference name="event.input.adapter.service"
