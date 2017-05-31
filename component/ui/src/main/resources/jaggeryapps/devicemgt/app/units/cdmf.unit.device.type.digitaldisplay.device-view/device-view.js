@@ -21,9 +21,15 @@ function onRequest(context) {
     var deviceType = context.uriParams.deviceType;
     var deviceId = request.getParameter("id");
     var devicemgtProps = require("/app/modules/conf-reader/main.js")["conf"];
+
+    var getProperty = require("process").getProperty;
+    var port = getProperty("carbon.https.port");
+    var host = getProperty("carbon.local.ip");
+    var sessionId = session.getId();
+
     var autoCompleteParams = [
         {"name": "deviceId", "value": deviceId},
-        {"name": "sessionId", "value": genUID()}
+        {"name": "sessionId", "value":sessionId}
     ];
 
     if (deviceType != null && deviceType != undefined && deviceId != null && deviceId != undefined) {
@@ -36,15 +42,14 @@ function onRequest(context) {
                 "autoCompleteParams": autoCompleteParams,
                 "encodedFeaturePayloads": "",
                 "portalUrl": devicemgtProps['portalURL'],
-                "anchor": JSON.stringify(anchor)
+                "anchor": JSON.stringify(anchor),
+                "port":port,
+                "host":host,
+                "sessionId":sessionId
             };
         } else {
             response.sendError(404, "Device Id " + deviceId + " of type " + deviceType + " cannot be found!");
             exit();
         }
     }
-}
-
-function genUID() {
-    return 'id-' + Math.random().toString(36).substr(2, 16);
 }

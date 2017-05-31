@@ -24,10 +24,10 @@ window.onload = function () {
 
 window.onbeforeunload = function () {
     disconnect();
-}
+};
 
 function connect() {
-    displayClient = new WebSocket("wss://" + host + ":" + port + "/digitaldisplay/" + sessionId);
+    displayClient = new WebSocket("wss://localhost:" + port + "/" + sessionId);
 
     displayClient.onmessage = function (event) {
         var message = event.data;
@@ -50,18 +50,16 @@ function connect() {
             operationDiv.style.color = '#D8000C';
         } else if (type.valueOf() == new String("ContentList").valueOf()) {
             var resources = reply.split("-");
-            var ul = document.getElementById("content-list");
-            ul.innerHTML = "";
-            for (i = 0; i < resources.length; i++) {
-                var li = document.createElement("li");
-                li.appendChild(document.createTextNode(resources[i]));
-                ul.appendChild(li);
+            var ul = $('#content-list');
+            ul.html = "";
+            for (var i = 0; i < resources.length; i++) {
+                $('#content-list').append('<li>'+resources[i]+'</li>');
             }
         } else if (type.valueOf() == new String("DeviceStatus").valueOf()) {
             var resources = reply.split("-");
             var ul = document.getElementById("device-statics");
             ul.innerHTML = "";
-            for (i = 0; i < resources.length; i++) {
+            for (var i = 0; i < resources.length; i++) {
                 var li = document.createElement("li");
                 li.appendChild(document.createTextNode(resources[i]));
                 ul.appendChild(li);
@@ -77,5 +75,8 @@ function connect() {
 }
 
 function disconnect() {
-    displayClient.close();
+    if (displayClient!=null){
+        displayClient.close();
+        displayClient = null;
+    }
 }
