@@ -23,13 +23,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.device.digitaldisplay.service.impl.constants.DigitalDisplayConstants;
 import org.wso2.carbon.device.digitaldisplay.service.impl.exception.DigitalDisplayException;
-import org.wso2.carbon.device.digitaldisplay.service.impl.transport.mqtt.MqttConfig;
 import org.wso2.carbon.device.mgt.common.operation.mgt.Operation;
 import org.wso2.carbon.device.mgt.common.operation.mgt.OperationManagementException;
 import org.wso2.carbon.device.mgt.core.operation.mgt.CommandOperation;
 import org.wso2.carbon.device.mgt.common.*;
 import org.wso2.carbon.device.digitaldisplay.service.impl.util.APIUtil;
-import org.wso2.carbon.device.digitaldisplay.service.impl.util.DigitalDisplayMQTTConnector;
 import org.wso2.carbon.device.digitaldisplay.service.impl.util.ZipArchive;
 import org.wso2.carbon.device.digitaldisplay.service.impl.util.ZipUtil;
 import org.wso2.carbon.apimgt.application.extension.APIManagementProviderService;
@@ -58,7 +56,6 @@ import java.util.*;
 public class DigitalDisplayServiceImpl implements DigitalDisplayService{
 
     private static Log log = LogFactory.getLog(DigitalDisplayServiceImpl.class);
-    private static DigitalDisplayMQTTConnector digitalDisplayMQTTConnector;
     private static final String KEY_TYPE = "PRODUCTION";
     private static ApiApplicationKey apiApplicationKey;
 
@@ -218,40 +215,6 @@ public class DigitalDisplayServiceImpl implements DigitalDisplayService{
         UUID uuid = UUID.randomUUID();
         long l = ByteBuffer.wrap(uuid.toString().getBytes(StandardCharsets.UTF_8)).getLong();
         return Long.toString(l, Character.MAX_RADIX);
-    }
-
-
-//    private boolean waitForServerStartup() {
-//        while (!IoTServerStartupListener.isServerReady()) {
-//            try {
-//                Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
-    public DigitalDisplayMQTTConnector getDigitalDisplayMQTTConnector() {
-        return DigitalDisplayServiceImpl.digitalDisplayMQTTConnector;
-    }
-
-    public void setDigitalDisplayMQTTConnector(final DigitalDisplayMQTTConnector digitalDisplayMQTTConnector) {
-
-        Runnable connector = new Runnable() {
-            public void run() {
-                DigitalDisplayServiceImpl.digitalDisplayMQTTConnector = digitalDisplayMQTTConnector;
-                if (MqttConfig.getInstance().isEnabled()) {
-                    digitalDisplayMQTTConnector.connect();
-                } else {
-                    log.warn("MQTT disabled in 'devicemgt-config.xml'. " +
-                            "Hence, DigitalDisplayMQTTConnector not started.");
-                }
-            }
-        };
-        Thread connectorThread = new Thread(connector);
-        connectorThread.setDaemon(true);
-        connectorThread.start();
     }
 
     public Response restartBrowser(String deviceId, String sessionId) {

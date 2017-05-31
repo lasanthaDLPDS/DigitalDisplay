@@ -35,9 +35,5 @@
         </jaxrs:providers>
     </jaxrs:server>
 
-    <bean id="communicationHandler"
-          class="org.wso2.carbon.device.digitaldisplay.service.impl.util.DigitalDisplayMQTTConnector" >
-    </bean>
-
 </beans>
 
