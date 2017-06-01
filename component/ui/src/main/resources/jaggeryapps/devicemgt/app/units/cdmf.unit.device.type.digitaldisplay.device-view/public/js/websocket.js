@@ -58,7 +58,7 @@ function connect() {
         } else if (type.valueOf() == new String("DeviceStatus").valueOf()) {
             var resources = reply.split("-");
             var ul = $('#device-statics');
-            ul.innerHTML = "";
+            ul.html = "";
             for (var i = 0; i < resources.length; i++) {
                 $('#device-statics').append('<li>'+resources[i]+'</li>');
             }
