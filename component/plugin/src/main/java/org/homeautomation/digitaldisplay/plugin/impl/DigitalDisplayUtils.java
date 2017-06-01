@@ -33,7 +33,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Contains utility methods used by FireAlarm plugin.
+ * Contains utility methods used by Digital Display plugin.
  */
 public class DigitalDisplayUtils {
 

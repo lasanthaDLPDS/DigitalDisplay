@@ -16,7 +16,7 @@
  *   under the License.
  *
  */
-package org.homeautomation.digitaldisplay.plugin.config.exception;
+package org.homeautomation.digitaldisplay.plugin.exception;
 
 public class DigitalDisplayConfigurationException extends Exception {
 

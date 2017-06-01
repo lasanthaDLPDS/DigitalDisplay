@@ -28,11 +28,11 @@ public class DigitalDisplayEventAdapterSubscription implements InputEventAdapter
             DigitalDisplayWebSocketServerEndPoint.sendMessage(sessionId, new StringBuilder(responseMessage));
         }  else if (messageData.length == 3){
             String response = messageData[2];
-            JSONObject schreenShot = new JSONObject(response);
-            String picId = schreenShot.getString("pic_id");
-            String data = schreenShot.getString("data");
-            int pos = schreenShot.getInt("pos");
-            int length = schreenShot.getInt("size");
+            JSONObject screenShot = new JSONObject(response);
+            String picId = screenShot.getString("pic_id");
+            String data = screenShot.getString("data");
+            int pos = screenShot.getInt("pos");
+            int length = screenShot.getInt("size");
             createScreenshot(sessionId, picId, pos, length, data);
         }
     }

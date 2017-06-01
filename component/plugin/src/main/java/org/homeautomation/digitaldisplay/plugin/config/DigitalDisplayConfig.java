@@ -2,7 +2,7 @@ package org.homeautomation.digitaldisplay.plugin.config;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.homeautomation.digitaldisplay.plugin.config.exception.DigitalDisplayConfigurationException;
+import org.homeautomation.digitaldisplay.plugin.exception.DigitalDisplayConfigurationException;
 import org.w3c.dom.Document;
 import org.wso2.carbon.utils.CarbonUtils;
 
