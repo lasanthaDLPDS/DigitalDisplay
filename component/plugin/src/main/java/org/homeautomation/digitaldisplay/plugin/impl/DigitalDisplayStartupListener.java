@@ -20,10 +20,12 @@ package org.homeautomation.digitaldisplay.plugin.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.homeautomation.digitaldisplay.plugin.constants.DigitalDisplayConstants;
 import org.homeautomation.digitaldisplay.plugin.internal.DigitalDisplayManagementDataHolder;
 import org.wso2.carbon.core.ServerStartupObserver;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class DigitalDisplayStartupListener implements ServerStartupObserver {
     private static final Log log = LogFactory.getLog(DigitalDisplayStartupListener.class);
@@ -35,10 +37,13 @@ public class DigitalDisplayStartupListener implements ServerStartupObserver {
     @Override
     public void completedServerStartup() {
         try {
+            Thread.sleep(20000);
             DigitalDisplayUtils.setupMqttInputAdapter();
-            DigitalDisplayManagementDataHolder.getInstance().getInputEventAdapterService().start();
+            DigitalDisplayManagementDataHolder.getInstance().getInputEventAdapterService().start(DigitalDisplayConstants.MQTT_ADAPTER_NAME);
         } catch (IOException e) {
-            log.error("Failed to intilaize the virtual firealarm input adapter", e);
+            log.error("Failed to initialize the Digital Display input adapter", e);
+        } catch (InterruptedException e) {
+            log.error("Failed to initialize the Digital Display input adapter", e);
         }
     }
 
