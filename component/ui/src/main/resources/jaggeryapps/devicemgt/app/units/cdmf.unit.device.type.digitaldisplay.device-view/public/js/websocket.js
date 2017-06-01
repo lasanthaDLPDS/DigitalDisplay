@@ -57,12 +57,10 @@ function connect() {
             }
         } else if (type.valueOf() == new String("DeviceStatus").valueOf()) {
             var resources = reply.split("-");
-            var ul = document.getElementById("device-statics");
+            var ul = $('#device-statics');
             ul.innerHTML = "";
             for (var i = 0; i < resources.length; i++) {
-                var li = document.createElement("li");
-                li.appendChild(document.createTextNode(resources[i]));
-                ul.appendChild(li);
+                $('#device-statics').append('<li>'+resources[i]+'</li>');
             }
         }
 
