@@ -221,7 +221,7 @@ public interface DigitalDisplayService {
             }
     )
     Response editSequence(@PathParam("deviceId") String deviceId, @FormParam("name") String name,
-                          @FormParam("attribute") String attribute, @FormParam("new-value") String newValue,
+                          @FormParam("attribute") String attribute, @FormParam("newValue") String newValue,
                           @QueryParam("sessionId") String sessionId);
 
     @Path("device/{deviceId}/upload-content")
@@ -239,8 +239,8 @@ public interface DigitalDisplayService {
                     })
             }
     )
-    Response uploadContent(@PathParam("deviceId") String deviceId, @FormParam("remote-path") String remotePath,
-                           @FormParam("screen-name") String screenName, @QueryParam("sessionId") String sessionId);
+    Response uploadContent(@PathParam("deviceId") String deviceId, @FormParam("remotePath") String remotePath,
+                           @FormParam("screenName") String screenName, @QueryParam("sessionId") String sessionId);
 
     /**
      * Add new resource end to the existing sequence
