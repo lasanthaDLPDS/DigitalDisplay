@@ -25,7 +25,6 @@ import org.homeautomation.digitaldisplay.plugin.internal.DigitalDisplayManagemen
 import org.wso2.carbon.core.ServerStartupObserver;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 public class DigitalDisplayStartupListener implements ServerStartupObserver {
     private static final Log log = LogFactory.getLog(DigitalDisplayStartupListener.class);
