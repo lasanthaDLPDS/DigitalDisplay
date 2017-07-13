@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~
+  ~ WSO2 Inc. licenses this file to you under the Apache License,
+  ~ Version 2.0 (the "License"); you may not use this file except
+  ~ in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+
+<DeviceTypeConfiguration name="digitaldisplay">
+    <Features>
+        <Feature code="remove">
+            <Name>Remove Device</Name>
+            <Description>Change device status into removed</Description>
+            <Operation context="/digitaldisplay/device/{deviceId}" method="DELETE">
+            </Operation>
+        </Feature>
+        <Feature code="update">
+            <Name>Update Device</Name>
+            <Description>Update device properties</Description>
+            <Operation context="/digitaldisplay/device/{deviceId}" method="PUT">
+                <QueryParameters>
+                    <Parameter>name</Parameter>
+                </QueryParameters>
+            </Operation>
+        </Feature>
+        <Feature code="get">
+            <Name>Get Device Data</Name>
+            <Description>Get device data</Description>
+            <Operation context="/digitaldisplay/device/{deviceId}" method="GET">
+            </Operation>
+        </Feature>
+        <Feature code="restart_browser">
+            <Name>Restart Browser</Name>
+            <Description>Restart the browser running in RPI</Description>
+            <Operation context="/digitaldisplay/device/{deviceId}/restart-browser" method="POST">
+                <QueryParameters>
+                    <Parameter>sessionId</Parameter>
+                </QueryParameters>
+            </Operation>
+        </Feature>
+        <Feature code="terminate">
+            <Name>Terminate Display</Name>
+            <Description>Terminate Running Display</Description>
+            <Operation context="/digitaldisplay/device/{deviceId}/terminate-display" method="POST">
+                <QueryParameters>
+                    <Parameter>sessionId</Parameter>
+                </QueryParameters>
+            </Operation>
+        </Feature>
+        <Feature code="restart_display">
+            <Name>Restart Display</Name>
+            <Description>Restart the running display</Description>
+            <Operation context="/digitaldisplay/device/{deviceId}/restart-display" method="POST">
+                <QueryParameters>
+                    <Parameter>sessionId</Parameter>
+                </QueryParameters>
+            </Operation>
+        </Feature>
+        <Feature code="change_slides">
+            <Name>Change Slides</Name>
+            <Description>Change the running slide sequence</Description>
+            <Operation context="/digitaldisplay/device/{deviceId}/edit-sequence" method="POST">
+                <FormParameters>
+                    <Parameter>name</Parameter>
+                    <Parameter>attribute</Parameter>
+                    <Parameter>newValue</Parameter>
+                </FormParameters>
+                <QueryParameters>
+                    <Parameter>sessionId</Parameter>
+                </QueryParameters>
+            </Operation>
+        </Feature>
+        <Feature code="upload_content">
+            <Name>Upload Content</Name>
+            <Description>Upload content into digital display</Description>
+            <Operation context="/digitaldisplay/device/{deviceId}/upload-content" method="POST">
+                <FormParameters>
+                    <Parameter>remotePath</Parameter>
+                    <Parameter>screenName</Parameter>
+                </FormParameters>
+                <QueryParameters>
+                    <Parameter>sessionId</Parameter>
+                </QueryParameters>
+            </Operation>
+        </Feature>
+        <Feature code="add_new_resources">
+            <Name>Add Resources</Name>
+            <Description>Add new resources into existent sequence</Description>
+            <Operation context="/digitaldisplay/device/{deviceId}/add-resource" method="POST">
+                <FormParameters>
+                    <Parameter>type</Parameter>
+                    <Parameter>time</Parameter>
+                    <Parameter>path</Parameter>
+                    <Parameter>name</Parameter>
+                    <Parameter>position</Parameter>
+                </FormParameters>
+                <QueryParameters>
+                    <Parameter>sessionId</Parameter>
+                </QueryParameters>
+            </Operation>
+        </Feature>
+        <Feature code="remove_resource">
+            <Name>Remove Slide</Name>
+            <Description>Remove particular slide in sequence</Description>
+            <Operation context="/digitaldisplay/device/{deviceId}/remove-resource" method="POST">
+                <FormParameters>
+                    <Parameter>name</Parameter>
+                </FormParameters>
+                <QueryParameters>
+                    <Parameter>sessionId</Parameter>
+                </QueryParameters>
+            </Operation>
+        </Feature>
+        <Feature code="restart_server">
+            <Name>Restart Server In Display</Name>
+            <Description>Restart the running server in display</Description>
+            <Operation context="/digitaldisplay/device/{deviceId}/restart-server" method="POST">
+                <QueryParameters>
+                    <Parameter>sessionId</Parameter>
+                </QueryParameters>
+            </Operation>
+        </Feature>
+        <Feature code="get_screenshot">
+            <Name>Take Screenshot</Name>
+            <Description>Take a screenshot of running display</Description>
+            <Operation context="/digitaldisplay/device/{deviceId}/screenshot" method="POST">
+                <QueryParameters>
+                    <Parameter>sessionId</Parameter>
+                </QueryParameters>
+            </Operation>
+        </Feature>
+        <Feature code="get_status">
+            <Name>Get RPI Status</Name>
+            <Description>Get status of RPI which is used to run digigital display</Description>
+            <Operation context="/digitaldisplay/device/{deviceId}/get-device-status" method="POST">
+                <QueryParameters>
+                    <Parameter>sessionId</Parameter>
+                </QueryParameters>
+            </Operation>
+        </Feature>
+        <Feature code="get_content_list">
+            <Name>Running Slides</Name>
+            <Description>Get details of running slides</Description>
+            <Operation context="/digitaldisplay/device/{deviceId}/get-content-list" method="POST">
+                <QueryParameters>
+                    <Parameter>sessionId</Parameter>
+                </QueryParameters>
+            </Operation>
+        </Feature>
+
+    </Features>
+
+    <ProvisioningConfig>
+        <SharedWithAllTenants>false</SharedWithAllTenants>
+    </ProvisioningConfig>
+
+    <PushNotificationProvider type="MQTT">
+        <FileBasedProperties>true</FileBasedProperties>
+        <!--if file based properties is set to false then the configuration will be picked from platform configuration-->
+        <ConfigProperties>
+            <Property Name="mqttAdapterName">digitaldisplay.mqtt.adapter</Property>
+            <Property Name="username">admin</Property>
+            <Property Name="password">admin</Property>
+            <Property Name="qos">0</Property>
+            <Property Name="scopes"/>
+            <Property Name="clearSession">true</Property>
+        </ConfigProperties>
+    </PushNotificationProvider>
+
+    <!--<PushNotificationProvider type="XMPP">-->
+    <!--<FileBasedProperties>true</FileBasedProperties>-->
+    <!--&lt;!&ndash;if file based properties is set to false then the configuration will be picked from platform configuration&ndash;&gt;-->
+    <!--<ConfigProperties>-->
+    <!--<Property Name="xmpp.adapter.name">digitaldisplay.xmpp.adapter</Property>-->
+    <!--<Property Name="host">localhost</Property>-->
+    <!--<Property Name="port">5222</Property>-->
+    <!--<Property Name="username">admin</Property>-->
+    <!--<Property Name="password">admin</Property>-->
+    <!--<Property Name="jid">admin@localhost</Property>-->
+    <!--<Property Name="server.name">localhost</Property>-->
+    <!--</ConfigProperties>-->
+    <!--</PushNotificationProvider>-->
+
+    <License>
+        <Language>en_US</Language>
+        <Version>1.0.0</Version>
+        <Text>This is license text</Text>
+    </License>
+
+</DeviceTypeConfiguration>
