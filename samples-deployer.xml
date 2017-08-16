@@ -50,14 +50,17 @@
                             <goal>p2-repo-gen</goal>
                         </goals>
                         <configuration>
-                            <metadataRepository>file:${basedir}/p2-repo</metadataRepository>
-                            <artifactRepository>file:${basedir}/p2-repo</artifactRepository>
+                            <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
+                            <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
                             <publishArtifacts>true</publishArtifacts>
                             <publishArtifactRepository>true</publishArtifactRepository>
                             <featureArtifacts>
-				<featureArtifactDef>
-				    org.homeautomation:org.homeautomation.digitaldisplay.feature:${org.digitaldisplay.version}
-				</featureArtifactDef>
+                                <featureArtifactDef>
+				                    org.homeautomation:org.homeautomation.digitaldisplay.ui.feature:${org.digitaldisplay.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+				                    org.homeautomation:org.homeautomation.digitaldisplay.backend.feature:${org.digitaldisplay.version}
+                                </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
                     </execution>
@@ -69,13 +72,60 @@
                         </goals>
                         <configuration>
                             <profile>default</profile>
-                            <metadataRepository>file:${basedir}/p2-repo</metadataRepository>
-                            <artifactRepository>file:${basedir}/p2-repo</artifactRepository>
-                            <destination>${basedir}/../core/repository/components</destination>
+                            <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
+                            <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
+                            <destination>${basedir}/../wso2/components</destination>
                             <deleteOldProfileFiles>false</deleteOldProfileFiles>
                             <features>
-				<feature>
-                                    <id>org.homeautomation.digitaldisplay.feature.group</id>
+                                <!-- Digital Display Features -->
+                                <feature>
+				                    <id>org.homeautomation.digitaldisplay.ui.feature.group</id>
+                                    <version>${org.digitaldisplay.version}</version>
+                                </feature>
+                                <feature>
+				                    <id>org.homeautomation.digitaldisplay.backend.feature.group</id>
+                                    <version>${org.digitaldisplay.version}</version>
+                                </feature>
+                            </features>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>manager-feature-install</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>p2-profile-gen</goal>
+                        </goals>
+                        <configuration>
+                            <profile>device-manager</profile>
+                            <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
+                            <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
+                            <destination>${basedir}/../wso2/components</destination>
+                            <deleteOldProfileFiles>false</deleteOldProfileFiles>
+                            <features>
+                                <!-- Digital Display UI Features -->
+                                <feature>
+				                    <id>org.homeautomation.digitaldisplay.ui.feature.group</id>
+                                    <version>${org.digitaldisplay.version}</version>
+                                </feature>
+                            </features>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>backend-feature-install</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>p2-profile-gen</goal>
+                        </goals>
+                        <configuration>
+                            <profile>device-backend</profile>
+                            <metadataRepository>file:${basedir}/target/p2-repo</metadataRepository>
+                            <artifactRepository>file:${basedir}/target/p2-repo</artifactRepository>
+                            <destination>${basedir}/../wso2/components</destination>
+                            <deleteOldProfileFiles>false</deleteOldProfileFiles>
+                            <features>
+                                <!-- Digital Display BE Features -->
+                                <feature>
+				                    <id>org.homeautomation.digitaldisplay.backend.feature.group</id>
                                     <version>${org.digitaldisplay.version}</version>
                                 </feature>
                             </features>
@@ -94,14 +144,17 @@
                         <configuration>
                             <tasks>
                                 <replace token="false" value="true"
-                                         dir="../core/repository/components/default/configuration/org.eclipse.equinox.simpleconfigurator">
+                                         dir="../wso2/components/default/configuration/org.eclipse.equinox.simpleconfigurator">
                                     <include name="**/bundles.info"/>
                                 </replace>
-                                <copy todir="../analytics/repository/deployment/server/carbonapps">
-                                    <fileset dir="../core/repository/deployment/server/carbonapps">
-                                        <include name="*.car"/>
-                                    </fileset>
-                                </copy>
+                                <replace token="false" value="true"
+                                         dir="../wso2/components/device-manager/configuration/org.eclipse.equinox.simpleconfigurator">
+                                    <include name="**/bundles.info"/>
+                                </replace>
+                                <replace token="false" value="true"
+                                         dir="../wso2/components/device-backend/configuration/org.eclipse.equinox.simpleconfigurator">
+                                    <include name="**/bundles.info"/>
+                                </replace>
                             </tasks>
                         </configuration>
                         <goals>
@@ -189,8 +242,7 @@
         </repository>
     </repositories>
     <properties>
-        <carbon.device.mgt.plugin.version>3.0.8</carbon.device.mgt.plugin.version>
-        <org.coffeeking.version>1.0.0</org.coffeeking.version>
+        <carbon.device.mgt.plugin.version>4.0.55</carbon.device.mgt.plugin.version>
 	<org.digitaldisplay.version>3.0.0</org.digitaldisplay.version>
     </properties>
 </project>
