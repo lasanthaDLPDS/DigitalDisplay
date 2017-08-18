@@ -413,7 +413,7 @@
         <carbon.device.mgt.version>3.0.67</carbon.device.mgt.version>
         <carbon.device.mgt.plugin.version>4.0.55</carbon.device.mgt.plugin.version>
 
-        <paho.mqtt.version>1.0.2</paho.mqtt.version>
+        <paho.mqtt.version>1.1.1</paho.mqtt.version>
         <commons-json.version>3.0.0.wso2v1</commons-json.version>
         <eclipse.osgi.version>3.9.1.v20130814-1242</eclipse.osgi.version>
         <javax.ws.rs.version>1.1.1</javax.ws.rs.version>

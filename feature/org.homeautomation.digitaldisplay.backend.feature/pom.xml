@@ -53,6 +53,11 @@
             <artifactId>h2-database-engine</artifactId>
             <version>1.2.140.wso2v3</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.guice.wso2</groupId>
+            <artifactId>guice</artifactId>
+            <version>3.0.wso2v1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -173,6 +178,9 @@
                             <bundles>
                                 <bundleDef>
                                     org.homeautomation:org.homeautomation.digitaldisplay.plugin:${org.homeautomation.version}
+                                </bundleDef>
+                                <bundleDef>
+                                    com.google.guice.wso2:guice:3.0.wso2v1
                                 </bundleDef>
                             </bundles>
                             <importFeatures>
