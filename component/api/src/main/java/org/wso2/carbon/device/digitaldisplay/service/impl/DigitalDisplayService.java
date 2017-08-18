@@ -38,7 +38,7 @@ import javax.ws.rs.core.Response;
                 }
         ),
         tags = {
-                @Tag(name = "digitaldisplay", description = "")
+                @Tag(name = "digitaldisplay,device_management", description = "")
         }
 )
 @Scopes(
